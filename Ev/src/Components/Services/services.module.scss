@@ -1,0 +1,17 @@
+.main{
+  position: relative;
+  background-image: radial-gradient(circle at center center, rgb(6,144,126),rgb(8, 8, 8));;
+}
+.topic{
+  text-align: center;
+  padding-top: 100px;
+  color:#fff;
+}
+.video{
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left:0;
+  width:100%;
+height: 100%;
+  object-fit: cover;}

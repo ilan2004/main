@@ -1,0 +1,25 @@
+.footer{
+    padding: 0 0 50px 0;
+    background:#117865;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 100px; 
+    color:#fff;
+    display: flex;
+   justify-content: center;
+
+}
+.emblem{
+    height:14vh;
+  }
+  .num{
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+  .mail{
+    cursor: pointer;
+    padding-top: 20px;;
+  }

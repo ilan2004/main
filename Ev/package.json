@@ -1,0 +1,46 @@
+{
+  "name": "ev",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.3.3",
+    "@gsap/react": "^2.1.0",
+    "@react-three/drei": "^9.102.3",
+    "@react-three/fiber": "^8.15.19",
+    "@studio-freight/lenis": "^1.0.39",
+    "@studio-freight/react-lenis": "^0.0.45",
+    "@types/three": "^0.162.0",
+    "bootstrap": "^5.3.3",
+    "framer-motion": "^11.0.12",
+    "framer-motion-3d": "^11.0.13",
+    "gsap": "^3.12.5",
+    "notistack": "^3.0.1",
+    "react": "^18.2.0",
+    "react-animated-cursor": "^2.11.2",
+    "react-bootstrap": "^2.10.1",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.8.1",
+    "react-preloaders": "^3.0.3",
+    "react-use-gesture": "^9.1.3",
+    "react-use-scroll-snap": "^1.0.0",
+    "sass": "^1.71.1",
+    "three": "^0.162.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "vite": "^5.1.6"
+  }
+}

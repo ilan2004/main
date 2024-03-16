@@ -1,0 +1,9 @@
+.three{
+    position:relative;
+    padding:0px;
+    height: 100vh !important;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-image: radial-gradient(circle at center center, rgb(3,3,3),rgb(6,144,126));
+}

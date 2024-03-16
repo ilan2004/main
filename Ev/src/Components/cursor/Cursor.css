@@ -1,0 +1,10 @@
+.custom-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff; /* Change color as needed */
+    pointer-events: none; /* Ensure the cursor does not interfere with mouse events */
+    z-index: 9999; /* Ensure the cursor appears above other elements */
+  }
+  
