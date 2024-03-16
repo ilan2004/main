@@ -45,7 +45,7 @@ export default function App() {
       <ReactLenis root>
         
       <div className="app">
-        <PreLoader/>
+        {/* <PreLoader/> */}
       <img className='Wave' src={Wave}
       ref={ref}
       style={{
