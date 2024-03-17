@@ -13,6 +13,7 @@
     flex-direction: column;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
+    text-align: center;
     font-style: normal;
     justify-content:center;
     align-items: center;
@@ -23,7 +24,7 @@
     width: 700px;
 }
 .h11{
-    text-align: justify;
+    text-align: center;
     font-size: 5.5rem;
     font-weight: 600;
     color:#009A89;
@@ -39,6 +40,7 @@
     background: linear-gradient(120deg, #009A89, #EB9019);
     -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
     color: transparent;
+    font-size: 2.5rem;
 }
 .blob{
     opacity: 0.16;

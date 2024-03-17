@@ -43,7 +43,7 @@ const Navbars = () => {
       >
         <Container className='box'  style={{
         opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2.8s"
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s"
       }}>
           <Navbar.Brand href="#home">
             <img className='emblem' src={logo} alt="" /> 
@@ -64,7 +64,9 @@ const Navbars = () => {
                 <a href='#'><img src={navIcon2} alt=''/></a>
                 <a href='#'><img src={navicon4} alt=''/></a>
             </div> */}
-            <button className='vvd' onClick={()=> console.log('connect')}><span>Let's Connect</span></button> 
+            <button className='vvd' onClick={()=> console.log('connect')}>  <a className='vvda' href="https://wa.me/917349344224">
+    <span>Let's Connect</span>
+  </a></button> 
             
           </span>
           

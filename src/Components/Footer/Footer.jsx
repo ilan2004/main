@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../../assets/img/Hertz1.png';
 import navIcon1 from '../../assets/img/nav-icon1.svg';
 import navIcon2 from '../../assets/img/nav-icon2.svg';
-import navicon3 from '../../assets/img/nav-icon3.svg';
+import navicon3 from '../../assets/img/whatsapp.svg';
 import './Footer.css'
 import {Col,Row,Container} from 'react-bootstrap';
  const Footer = () => {
@@ -32,7 +32,7 @@ import {Col,Row,Container} from 'react-bootstrap';
                     <div className='social-icon'>
                     <a href=''><img src={navIcon1}/></a>
                     <a href=''><img src={navIcon2}/></a>
-                    <a href=''><img src={navicon3}/></a>
+                    <a className='vvda' href="https://wa.me/917349344224"><img src={navicon3}/></a>
                     </div>
                     <p className='mail' onClick={handleEmailClick}>Email: {emailAddress}</p>
                         <p>CopyRight 2022, All Right Reserved</p>

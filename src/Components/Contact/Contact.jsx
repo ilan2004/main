@@ -25,8 +25,8 @@ const ContactWithSnackbar = () => {
       }
   
       emailjs
-        .sendForm('service_t8joh1r', 'template_wgyccnb', form.current, {
-          publicKey: 'MtWVrckAyn8Jy7_mP',
+        .sendForm('service_wa3u04w', 'template_4g3rggg', form.current, {
+          publicKey: 'Qbcmn6dU4S2rOSw6O',
         })
         .then(
             () => {

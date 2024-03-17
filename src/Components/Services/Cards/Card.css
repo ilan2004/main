@@ -23,7 +23,7 @@
 h2 {
     text-align: center;
     margin: 0px;
-    font-size: 28px;
+    font-size: 2.2rem;
   }
   .body {
     display: flex;
@@ -37,28 +37,26 @@ h2 {
     top: 10%;
   }
   p {
-    font-size: 16px;
-
-    /* &::first-letter {
-      font-size: 28px;
-      font-family: 'Title';
-    } */
+    font-size:1.3rem; 
   }
   span {
     display: flex;
     align-items: center;
     gap: 5px;}
-    a {
-        font-size: 12px;
-        text-decoration: underline;
+    .aa {
+        font-size: 16px;
+        text-decoration: none;
         cursor: pointer;
+        color: #fff;
       }
       .imageContainer {
         position: relative;
         width: 60%;
         height: 100%;
         border-radius: 25px;
-        overflow: hidden}
+        overflow: hidden;
+
+    }
         .inner {
             width: 100%;
             height: 100%;
@@ -68,30 +66,20 @@ h2 {
             width: 500px;
             height: 250px;
           }
-          @media screen and (min-width: 6000px) {
-            .card {
-              width: 50%; 
+          @media (max-width: 576px) {
+            .description{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
-          
-            .body {
-              flex-direction: row; /* Display content side by side on larger screens */
-            }
-          
-            .description {
-              width: 40%; /* Adjust width for larger screens */
-              margin-bottom: 0; /* Remove margin for better alignment */
-            }
-          
+        
+        
             .imageContainer {
-              width: 100%; /* Adjust width for larger screens */
-            }
-            .cardContainer{
-            width: 50vh;
-            left: 0px;
+                display: none;
             }
             .imaged {
-                object-fit: cover;
-                width:100%;
-                height: 100%;
-          }
+                display: none;
+            }
         }

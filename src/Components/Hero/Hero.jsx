@@ -16,15 +16,15 @@ import UseMousePosition from '../Utilitis/useMousePosition';
     >
         <div className="Head" style={{
         opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 3s"
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.8s"
       }}>
             
             <h1  className='h11' > 
-                HertzEv
-                <span  className='solutions'> SOLUTIONS</span>
+                Hertz Ev
+                <span  className='solutions'> ELECTRIC VEHICLE SOLUTIONS</span>
             </h1>
             <p className='p11' >
-                Electric car solutions
+                Advance BMS Developers
             </p >
             <img onMouseEnter={textEnter} onMouseLeave={textLeave} src={Blob} className='blob' />
         </div>

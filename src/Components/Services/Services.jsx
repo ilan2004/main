@@ -20,7 +20,7 @@ export default function Services() {
     <main ref={container} className={styles.main}>
         
       <div className={styles.topic}>
-        <h1>Services</h1>
+        <h1>SERVICES</h1>
       </div>
       {
         all_items.map( (project, i) => {

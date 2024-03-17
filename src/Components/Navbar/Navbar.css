@@ -171,6 +171,12 @@ nav.navbar {
       .name{
         text-decoration: none;
       }
+      .vvda{
+        color: #fff;
+      }
+      .vvda:hover{
+        text-decoration: none;
+      }
       @media only screen and (max-width: 768px) {
         nav.navbar {
             padding: 12px 0!;
@@ -436,5 +442,11 @@ nav.navbar {
 
     .vvd{
         display: none;
+    }
+    
+  }
+  @media (max-width: 576px){
+    .emblem{
+        height:5vh!;
     }
   }
