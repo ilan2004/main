@@ -15,15 +15,15 @@ const Card = ({i, title, description, src, url, color, progress, range, targetSc
   const scale = useTransform(progress, range, [1, targetScale]);
  
   return (
-    <div ref={container} className={styles.cardContainer}>
+    <div ref={container} className='cardContainer'>
       <motion.div 
         style={{background: color, scale, top:`calc(-5vh + ${i * 25}px)`}} 
-        className={styles.card}
+        className='card'
       >
         <h2>{title}</h2>
-        <div className={styles.body}>
-          <div className={styles.description}>
-            <p>{description}</p>
+        <div className='body'>
+          <div className='description'>
+            <p className='desp'>{description}</p>
             <span>
               <a href={url} target="_blank">See more</a>
               <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,16 +32,16 @@ const Card = ({i, title, description, src, url, color, progress, range, targetSc
             </span>
           </div>
 
-          <div className={styles.imageContainer}>
+          <div className='imageContainer'>
             <motion.div
-              className={styles.inner}
+              className='inner'
               style={{scale: imageScale}}
             >
               <img
                 fill
                 src={src}
                 alt="image" 
-                className={styles.imaged}
+                className='imaged'
               />
             </motion.div>
           </div>
