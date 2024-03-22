@@ -1,11 +1,16 @@
 .main{
   position: relative;
-  background-image: radial-gradient(circle at center center, rgb(6,144,126),rgb(8, 8, 8));;
+  background: black;
 }
 .topic{
   text-align: center;
-  padding-top: 100px;
-  color:#fff;
+  padding-top: 50px;
+  background: linear-gradient(120deg, #009A89, #EB9019);
+  -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
+  color: transparent;
+  font-size: 4.5rem;
+  font-size: 5.5rem;
+  font-weight: 500;
 }
 .video{
   position: absolute;
