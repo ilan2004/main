@@ -23,7 +23,7 @@
 h2 {
     text-align: center;
     margin: 0px;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
   .body {
     display: flex;
@@ -41,7 +41,7 @@ h2 {
     align-items: center;
   }
   p {
-    font-size:1.3rem; 
+    font-size:1.1rem; 
   }
   span {
     display: flex;

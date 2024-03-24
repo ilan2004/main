@@ -26,6 +26,9 @@ import UseMousePosition from '../Utilitis/useMousePosition';
             <p className='p11' >
                 Advance BMS Developers
             </p >
+            <p className='next' >
+                Battery Extended Warranty Services
+            </p >
             <img onMouseEnter={textEnter} onMouseLeave={textLeave} src={Blob} className='blob' />
         </div>
        
