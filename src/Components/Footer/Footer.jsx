@@ -25,6 +25,14 @@ import {Col,Row,Container} from 'react-bootstrap';
                     <div className="num">
                             <p>Contact No:</p>
                             <p onClick={handlePhoneClick}>{phoneNumber}</p>
+                            <p>Head Office :
+Office # 388, 7th Main 8th Cross, Mico Layout, Bangalore, Karnataka, Pin- 560076.
+
+Branch Office:
+Building- 57, Kalpaka Nagar, Chackai, Trivandrum, Kerala, Pin – 695024
+
+Upcoming Workshop:
+Thrissur, Kerala</p>
                         </div>
                     
                 </Col>
