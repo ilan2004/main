@@ -6,8 +6,8 @@ import navicon3 from '../../assets/img/whatsapp.svg';
 import './Footer.css'
 import {Col,Row,Container} from 'react-bootstrap';
  const Footer = () => {
-    const phoneNumber = "+917349344224";
-    const emailAddress = "example@gmail.com";
+    const phoneNumber = "+918304963000";
+    const emailAddress = "Hertzevsolutions@gmail.com";
 
     const handlePhoneClick = () => {
         window.location.href = `tel:${phoneNumber}`;
@@ -32,10 +32,10 @@ import {Col,Row,Container} from 'react-bootstrap';
                     <div className='social-icon'>
                     <a href=''><img src={navIcon1}/></a>
                     <a href=''><img src={navIcon2}/></a>
-                    <a className='vvda' href="https://wa.me/917349344224"><img src={navicon3}/></a>
+                    <a className='vvda' href="https://wa.me/918304963000"><img src={navicon3}/></a>
                     </div>
                     <p className='mail' onClick={handleEmailClick}>Email: {emailAddress}</p>
-                        <p>CopyRight 2022, All Right Reserved</p>
+                        <p>CopyRight 2024, All Right Reserved</p>
                 </Col>
                 </Row>
         </Container>
