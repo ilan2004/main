@@ -1,6 +1,6 @@
 import React from 'react'
 import './Warranty.css'
-import War from '../../assets/img/Warranty.jpeg'
+import War from '../../assets/img/war1.png'
 const Warranty = () => {
   return (
     <div className='Warranty'>
