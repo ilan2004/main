@@ -18,7 +18,7 @@ import {Col,Row,Container} from 'react-bootstrap';
     };
   return (
     <footer className='footer'>
-        <Container>
+        <Container className='footer-cont'>
             <Row className="align-items-center">
                 <Col sm={6}>
                     <img className='emblem' src={logo}/>
