@@ -20,3 +20,16 @@
   width:100%;
 height: 100%;
   object-fit: cover;}
+  @media (max-width: 576px){
+
+    .topic{
+      text-align: center;
+      padding-top: 50px;
+      background: linear-gradient(120deg, #009A89, #EB9019);
+      -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
+      color: transparent;
+      font-size: 3rem;
+
+      font-weight: 500;
+    }
+  }

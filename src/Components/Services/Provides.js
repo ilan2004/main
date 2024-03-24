@@ -1,6 +1,7 @@
 import Battery1 from '../../assets/img/Battery1.jpg';
 import Battery2 from '../../assets/img/Battery2.webp';
 import Battery3 from '../../assets/img/Battery3.jpg';
+import Recharge from '../../assets/img/recharge.jpeg';
 
 
 
@@ -9,7 +10,7 @@ let all_items =
     {
         title: "Lithium-Ion Battery Testing and Quality Assurance Services",
         description:'We can evaluate your batteries for safety, transportation and environmental concerns against government regulations and industry standards. No matter where in the world you distribute your batteries, we can help you identify applicable requirements by both market and product type. We also can evaluate how a certification program can help your products gain access to multiple markets with one set of requirements.',
-        src:Battery1,
+        src:Recharge,
         color: " #F8F6D9",
         font:"#117865"
     },
@@ -17,7 +18,7 @@ let all_items =
     {
         title:'Lithium-ion battery packs for an electric three wheeler',
          description:'For e-rickshaws to navigate narrow lanes safely, they require robust stability. Battrixx electric three-wheeler battery packs offer advanced lithium-ion technology, boasting high energy density, long cycle life, efficient charging and discharging, excellent temperature performance, and top-notch safety. Their cutting-edge Battery Management System (BMS) is tailor-made for electric three-wheelers, ensuring reliability and value for money.',
-        src: Battery2,
+        src: Battery1,
         color: "#117865"
     },
     {
@@ -30,7 +31,7 @@ let all_items =
     {
         title: 'Lithium-ion battery packs for Electric car',
         description:'Skyrocketing fuel costs and climate change concerns have amplified the demand for sustainable transportation. Hybrid and electric vehicles offer a cost-effective and eco-conscious solution, improving fuel efficiency and reducing carbon emissions. HertzEv specializes in customizable lithium-ion battery solutions for electric four-wheelers, tailored for Indian road and temperature conditions with safety features and compact design.        ',
-        src: Battery2,
+        src: Battery3,
         color: "#117865"
     },
  
