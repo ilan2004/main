@@ -1,0 +1,16 @@
+.Warranty{
+    display: flex;
+    flex-direction: row;
+    background:#117865;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-around;
+  
+}
+.year{
+    height: 500px;
+    width: 500px;
+}
+.text{
+    color: #fff ;
+}

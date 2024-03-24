@@ -12,7 +12,7 @@ import UseMousePosition from '../Utilitis/useMousePosition';
     const isInView = useInView(ref, { once: true });
     const { mousePosition, cursorVariant, variants, textEnter, textLeave }= UseMousePosition();
   return (
-    <div className='Hero' ref={ref}
+    <div id='Home' className='Hero' ref={ref}
     >
         <div className="Head" style={{
         opacity: isInView ? 1 : 0,

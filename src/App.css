@@ -12,5 +12,5 @@
   pointer-events: none;
 }
 .App{
-  
+  scroll-behavior:smooth;
 }
