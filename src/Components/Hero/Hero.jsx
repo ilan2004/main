@@ -20,7 +20,7 @@ import UseMousePosition from '../Utilitis/useMousePosition';
       }}>
             
             <h1  className='h11' > 
-                Hertz Ev
+                HertzEv
                 <span  className='solutions'> ELECTRIC VEHICLE SOLUTIONS</span>
             </h1>
             <p className='p11' >
