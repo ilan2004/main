@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/img/Hertz1.png';
+import logo from '../../assets/img/Hertz.png';
 import navIcon1 from '../../assets/img/nav-icon1.svg';
 import navIcon2 from '../../assets/img/nav-icon2.svg';
 import navicon3 from '../../assets/img/whatsapp.svg';
@@ -25,14 +25,15 @@ import {Col,Row,Container} from 'react-bootstrap';
                     <div className="num">
                             
                             
-                            <p>Head Office :
-Office # 388, 7th Main 8th Cross, Mico Layout, Bangalore, Karnataka, Pin- 560076.
-
+<p><spam  className='thick'>Head Office :</spam> Office # 388, 7th Main 8th Cross, Mico Layout,<spam className='thick'> Bangalore , Karnataka,</spam> Pin- 560076.
+</p>
+<p>
+<spam  className='thick'>
 Branch Office:
-Building- 57, Kalpaka Nagar, Chackai, Trivandrum, Kerala, Pin – 695024
-
-Upcoming Workshop:
-Thrissur, Kerala</p>
+</spam>
+Building- 57, Kalpaka Nagar, Chackai,<spam  className='thick'> Trivandrum , Kerala</spam>, Pin – 695024
+</p>
+<p> <spam  className='thick'>Upcoming Workshop: </spam><spam  className='thick'>Thrissur, Kerala </spam></p>
                         </div>
                     
                 </Col>

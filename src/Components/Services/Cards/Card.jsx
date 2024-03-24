@@ -29,7 +29,7 @@ const Card = ({i, title,font, description, src, url,detail, color, progress, ran
             </span>
           </div>
 
-          {/* <div className='imageContainer'>
+          <div className='imageContainer'>
             <motion.div
               className='inner'
               style={{scale: imageScale}}
@@ -41,7 +41,7 @@ const Card = ({i, title,font, description, src, url,detail, color, progress, ran
                 className='imaged'
               />
             </motion.div>
-          </div> */}
+          </div>
 
         </div>
       </motion.div>
