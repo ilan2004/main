@@ -23,8 +23,8 @@ import {Col,Row,Container} from 'react-bootstrap';
                 <Col sm={6}>
                     <img className='emblem' src={logo}/>
                     <div className="num">
-                            <p>Contact No:</p>
-                            <p onClick={handlePhoneClick}>{phoneNumber}</p>
+                            
+                            
                             <p>Head Office :
 Office # 388, 7th Main 8th Cross, Mico Layout, Bangalore, Karnataka, Pin- 560076.
 
@@ -43,6 +43,8 @@ Thrissur, Kerala</p>
                     <a className='vvda' href="https://wa.me/918304963000"><img src={navicon3}/></a>
                     </div>
                     <p className='mail' onClick={handleEmailClick}>Email: {emailAddress}</p>
+                    <p>Contact No:</p>
+                    <p onClick={handlePhoneClick}>{phoneNumber}</p>
                         <p>CopyRight 2024, All Right Reserved</p>
                 </Col>
                 </Row>

@@ -17,7 +17,7 @@
     border-radius: 25px;
     padding: 50px;
     transform-origin: top;
-    height: 80vh;
+    height: 60vh;
     width: 100vw;
 }
 h2 {
@@ -71,6 +71,28 @@ h2 {
             height: 250px;
           }
           @media (max-width: 576px) {
+            .cardContainer {
+              height: 100vh;
+              display: flex;
+              width: 100vw;
+              align-items: center;
+              justify-content: center;
+              position: sticky;
+              top: 0px;
+              color: #F8F6D9;
+              /* left: 200px; */
+          }
+          .card {
+              display: flex;
+              flex-direction: column;
+              position: relative;
+              top: -25%;
+              border-radius: 25px;
+              padding: 50px;
+              transform-origin: top;
+              height: 80vh;
+              width: 100vw;
+          }
             .description{
                 width: 100%;
                 display: flex;
