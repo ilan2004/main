@@ -17,7 +17,7 @@
     width:50%;
 
 }
-@media (max-width: 576px) {
+@media (max-width: 768px){
     .Warranty{
     display: flex;
     flex-wrap: wrap;

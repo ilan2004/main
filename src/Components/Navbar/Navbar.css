@@ -20,7 +20,7 @@ nav.navbar {
         display: flex;
         justify-content: center;
       }
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         nav.navbar{
             width: 100vw;
         }
@@ -178,7 +178,7 @@ nav.navbar {
       .vvda:hover{
         text-decoration: none;
       }
-      @media only screen and (max-width: 768px) {
+      @media (max-width: 768px) {
         nav.navbar {
             padding: 12px 0!;
         }
@@ -224,19 +224,19 @@ nav.navbar {
         align-items: center;
         justify-content: center;
     }
-    @media (max-width: 576px) {
+    @media (max-width: 768px) {
         .me-auto {
           display: none;
         }
       }
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
     
         .vvd{
             display: none;
         }
       }
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px){
     nav.navbar{
         width: 100vw;
     }
@@ -390,7 +390,7 @@ nav.navbar {
   .name{
     text-decoration: none;
   }
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 768px){
     nav.navbar {
         padding: 12px 0!;
     }
@@ -441,14 +441,14 @@ nav.navbar {
       display: none;
     }
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
 
     .vvd{
         display: none;
     }
     
   }
-  @media (max-width: 576px){
+  @media (max-width: 768px){
     .emblem{
         height:5vh!;
     }

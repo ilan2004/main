@@ -31,7 +31,7 @@
     font-weight: 700;
 
   }
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 768px){
     .footer{
       padding:0;
       display: flex;

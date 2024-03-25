@@ -12,11 +12,6 @@ export default function Services() {
     offset: ['start start', 'end end']
   });
 
-  useEffect(() => {
-    // Scroll to the Services component on mount
-    container.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-  
 
   return (
     <main id='Services' ref={container} className={styles.main}>
