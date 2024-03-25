@@ -26,7 +26,7 @@ nav.navbar {
         }
       }
       nav.navbar.scrolled {
-        padding: 0px 0;
+        top: -70px;
         background-color: #117865;
       }
       nav.navbar a.navbar-brand {
@@ -452,4 +452,22 @@ nav.navbar {
     .emblem{
         height:5vh!;
     }
+    nav.navbar.scrolling-down {
+      top:-180px;
+      background-color: #117865;
+    }
+  }
+  .custom-navbar {
+    transition: top 0.3s;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .visible {
+    top: 0;
+  }
+  
+  .hidden {
+    top: -70px; /* Adjust the height of your navbar */
   }
