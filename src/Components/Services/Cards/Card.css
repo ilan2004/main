@@ -87,6 +87,7 @@ h2 {
               position: sticky;
               top: 0px;
               color: #F8F6D9;
+              
               /* left: 200px; */
           }
           .card {
@@ -97,8 +98,9 @@ h2 {
               border-radius: 25px;
               padding: 50px;
               transform-origin: top;
-              height: 80vh;
+              height: 90vh;
               width: 100vw;
+           
           }
             .description{
                 width: 100%;

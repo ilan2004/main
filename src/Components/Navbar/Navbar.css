@@ -241,7 +241,7 @@ nav.navbar {
         width: 100vw;
     }
   }
-  nav.navbar.scrolled {
+  nav.navbar.scrolling-down {
     padding: 0px 0;
     background-color: #117865;
   }
