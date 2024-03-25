@@ -4,21 +4,11 @@ nav.navbar {
     width: 100vw;
     top: 0;
     z-index: 9999;
-    transition:  0.32s ease-in-out;
+    transition:  0.6s ease-in-out;
     align-items: center;
     display: flex;
     justify-content: center;
     background-color: #117865;
-    nav.navbar {
-        padding: 18px 0;
-        position: fixed;
-        width: 100vw;
-        top: 0;
-        z-index: 9999;
-        transition:  0.32s ease-in-out;
-        align-items: center;
-        display: flex;
-        justify-content: center;
       }
       @media (max-width: 768px) {
         nav.navbar{
@@ -241,10 +231,7 @@ nav.navbar {
         width: 100vw;
     }
   }
-  nav.navbar.scrolling-down {
-    padding: 0px 0;
-    background-color: #117865;
-  }
+
   nav.navbar a.navbar-brand {
       width: 20%;
       
