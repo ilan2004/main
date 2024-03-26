@@ -1,5 +1,5 @@
 nav.navbar {
-    padding: 18px 0;
+    
     position: fixed;
     width: 100vw;
     top: 0;
@@ -9,6 +9,7 @@ nav.navbar {
     display: flex;
     justify-content: center;
     background-color: #117865;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.); /* Adjust values as needed */
       }
       @media (max-width: 768px) {
         nav.navbar{
@@ -79,7 +80,7 @@ nav.navbar {
       }
       .navbar-text button {
         font-weight: 700;
-        color: #fff;
+        color: #c9fd74;
         border: 1px solid #fff;
         padding: 18px 34px;
         font-size: 18px;
@@ -163,7 +164,7 @@ nav.navbar {
         text-decoration: none;
       }
       .vvda{
-        color: #fff;
+        color: #c9fd74;
       }
       .vvda:hover{
         text-decoration: none;
@@ -225,7 +226,7 @@ nav.navbar {
             display: none;
         }
       }
-  }
+  
   @media (max-width: 768px){
     nav.navbar{
         width: 100vw;
@@ -292,7 +293,7 @@ nav.navbar {
   }
   .navbar-text button {
     font-weight: 700;
-    color: #fff;
+    color: #c9fd74;
     border: 1px solid #fff;
     padding: 18px 34px;
     font-size: 18px;
@@ -458,3 +459,5 @@ nav.navbar {
   .hidden {
     top: -70px; /* Adjust the height of your navbar */
   }
+  
+  

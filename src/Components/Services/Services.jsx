@@ -4,6 +4,7 @@ import Card from './Cards/Card';
 import { useScroll } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import Car from '../../assets/img/Car.mp4';
+import { Element} from 'react-scroll';
 
 export default function Services() {
   const container = useRef(null);
@@ -12,9 +13,9 @@ export default function Services() {
     offset: ['start start', 'end end']
   });
 
-
   return (
-    <main id='Services' ref={container} className={styles.main}>
+
+    <main id='Services'  ref={container} className={styles.main}>
       <div className={styles.topic}>
         <div className='h112'>SERVICES</div>
       </div>
@@ -23,6 +24,7 @@ export default function Services() {
         return <Card key={`p_${i}`} i={i} {...project} progress={scrollYProgress} range={[i * 0.25, 1]} targetScale={targetScale} />;
       })}
     </main>
+
   );
 }
 

@@ -1,39 +1,48 @@
+// Navbar.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { animateScroll as scroll } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import logo from '../../assets/img/Hertz.png';
-import Transition from '../Transition/Transition';
 import Header from './Header';
 
 const Navbars = () => {
+
+  const [activeLink, setActiveLink] = useState(null);
   const [scrollDirection, setScrollDirection] = useState(null);
-  const [activeLink, setActiveLink] = useState(null); // Define activeLink state
+  const [scrolledBeyond100vh, setScrolledBeyond100vh] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       const prevScrollPos = handleScroll.prevScrollPos || currentScrollPos;
-      
-      if (currentScrollPos > prevScrollPos) {
-        setScrollDirection('down');
-      } else if (currentScrollPos < prevScrollPos) {
-        setScrollDirection('up');
+
+      if (!scrolledBeyond100vh && currentScrollPos >= window.innerHeight) {
+        setScrolledBeyond100vh(true);
       }
-      
+
+      if (scrolledBeyond100vh) {
+        if (currentScrollPos > prevScrollPos) {
+          setScrollDirection('down');
+        } else if (currentScrollPos < prevScrollPos) {
+          setScrollDirection('up');
+        }
+      }
+
       handleScroll.prevScrollPos = currentScrollPos;
     };
 
     window.addEventListener('scroll', handleScroll);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrolledBeyond100vh]);
 
-  const onUpdateActiveLink = (link) => {
-    setActiveLink(link);
-  };
+
+//smooth scroll
 
   return (
     <Navbar className={scrollDirection === 'down' ? 'scrolling-down' : (scrollDirection === 'up' ? 'scrolling-up' : '')} >
@@ -45,28 +54,53 @@ const Navbars = () => {
           <span className='navbar-toggler-icon'></span>
         </Navbar.Toggle>
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='me-auto'>
+          <Nav className='me-auto'>\
+          <ScrollLink
+             to="Home" 
+            spy={true} 
+            smooth={true} 
+             offset={50} 
+             duration={800} 
+    >
             <Nav.Link
+              as={Link}
               href='#Home'
-              className={activeLink === 'Home' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('#Home')}
+              className={activeLink === '#Home' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
             >
               Home
             </Nav.Link>
+            </ScrollLink>
+            <ScrollLink
+             to="Services" 
+            spy={true} 
+            smooth={true} 
+             offset={50} 
+             duration={800} 
+    >
             <Nav.Link
+              onClick={() => handleScrollTo('Services')}
               href='#Services'
               className={activeLink === 'Services' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('#Services')}
-            >
+              
+           >
               Services
             </Nav.Link>
+            </ScrollLink>
+            <ScrollLink
+             to="connect" 
+            spy={true} 
+            smooth={true} 
+             offset={50} 
+             duration={800} 
+    >
             <Nav.Link
+              onClick={() => handleScrollTo('#connect')}
+              className={activeLink === '#connect' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
               href='#connect'
-              className={activeLink === 'connect' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('#connect')}
             >
               Contact Us
             </Nav.Link>
+            </ScrollLink>
           </Nav>
           <span className='navbar-text'>
             <button className='vvd'>
@@ -78,7 +112,6 @@ const Navbars = () => {
         </Navbar.Collapse>
         <Header />
       </Container>
-      
     </Navbar>
   );
 }

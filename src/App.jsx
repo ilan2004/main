@@ -15,7 +15,7 @@ import Contact from "./Components/Contact/Contact";
 import PreLoader from "./Components/PreLoader/Preloader";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Warranty from "./Components/Warranty/Warranty";
-
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import Three from "./Components/3d/three";
 
 
@@ -34,11 +34,11 @@ export default function App() {
           <div className="app">
             <img className='Wave' src={Wave} ref={ref} style={{ opacity: isInView ? 1 : 0, transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s" }} />
             <Navbars />
-            <Hero path="#Home" />
+            <Hero path="Home" />
             <Three />
-            <Services path="#Services" />
+            <Services path="Services" />
             <Warranty/>
-            <Contact path="#Contact" />
+            <Contact path="Contact" />
             <Footer />
           </div>
         </ReactLenis>
