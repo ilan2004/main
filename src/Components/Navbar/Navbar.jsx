@@ -54,7 +54,7 @@ const Navbars = () => {
           <span className='navbar-toggler-icon'></span>
         </Navbar.Toggle>
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='me-auto'>\
+          <Nav className='me-auto'>
           <ScrollLink
              to="Home" 
             spy={true} 
