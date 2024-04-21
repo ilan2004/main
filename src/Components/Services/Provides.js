@@ -19,7 +19,7 @@ let all_items =
         title:'Lithium-ion battery packs for an electric three wheeler',
          description:'For e-rickshaws to navigate narrow lanes safely, they require robust stability. Battrixx electric three-wheeler battery packs offer advanced lithium-ion technology, boasting high energy density, long cycle life, efficient charging and discharging, excellent temperature performance, and top-notch safety. Their cutting-edge Battery Management System (BMS) is tailor-made for electric three-wheelers, ensuring reliability and value for money.',
         src: Battery1,
-        color: "#117865"
+        color: "#73c390"
     },
     {
         title: "Lithium-ion battery packs for an electric two-wheeler",

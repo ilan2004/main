@@ -1,0 +1,11 @@
+.logindesk{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 200px;
+}
+@media (max-width: 868px){
+    .logindesk{
+        display:none;
+    }
+}

@@ -461,4 +461,11 @@ nav.navbar {
     top: -70px; /* Adjust the height of your navbar */
   }
 
-  
+  .navbar-link{
+    color: #fff;
+    font-size: 1.1rem;
+  }
+  .navbar-link:hover{
+    text-decoration: none;
+    color:#cecbcb;
+  }

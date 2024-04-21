@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../../assets/img/Hertz.png';
 import Header from './Header';
-
+import { useAuth } from '../../Contexts/AuthContext';
 const Navbars = () => {
 
   const [activeLink, setActiveLink] = useState(null);
   const [scrollDirection, setScrollDirection] = useState(null);
   const [scrolledBeyond100vh, setScrolledBeyond100vh] = useState(false);
-
+  const { currentUser } = useAuth();
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
@@ -55,21 +55,14 @@ const Navbars = () => {
         </Navbar.Toggle>
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
-          <ScrollLink
-             to="Home" 
-            spy={true} 
-            smooth={true} 
-             offset={50} 
-             duration={800} 
-    >
+
             <Nav.Link
               as={Link}
-              href='#Home'
+              to ='/'
               className={activeLink === '#Home' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
             >
               Home
             </Nav.Link>
-            </ScrollLink>
             <ScrollLink
              to="Services" 
             spy={true} 
@@ -101,6 +94,13 @@ const Navbars = () => {
               Contact Us
             </Nav.Link>
             </ScrollLink>
+            
+            <Link
+            to={currentUser ? '/Form' : '/Login'} // Check if user is logged in
+              className={activeLink === '#Login' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
+              >
+              Account
+            </Link>
           </Nav>
           <span className='navbar-text'>
             <button className='vvd'>

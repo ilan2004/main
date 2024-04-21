@@ -20,6 +20,9 @@
     transform-origin: top;
     height: 65vh;
     width: 100vw;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 1 );
+
+
 }
 h2 {
     text-align: center;

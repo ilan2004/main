@@ -8,7 +8,7 @@ export default function index({data, setSelectedProject}) {
   return (
     <div className={styles.titles}>
         {
-            data.map( (project, i) => {
+             data.map( (project, i) => {
                 return <Title key={i} data={{...project, i}} setSelectedProject={setSelectedProject}/>
             })
         }
