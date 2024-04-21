@@ -112,8 +112,8 @@ ${props =>
 
 export const Overlay = styled.div`
 background: #117865;
-background: -webkit-linear-gradient(to right, #117865, #ff416c);
-background: linear-gradient(to right,#117865,#ff416c );
+background: -webkit-linear-gradient(to right, #117865, black);
+background: linear-gradient(to right,#117865,black );
 background-repeat: no-repeat;
 background-size: cover;
 background-position: 0 0;
