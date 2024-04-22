@@ -10,7 +10,7 @@ function Form() {
       <h2>{currentUser && currentUser.email}</h2>
       </div>
       <h1 className='comp-loc'>Regestered Company Location:</h1>
-    <form>
+    <form className='form-fill'>
       <input name=" Owner;s name" type="text" className="feedback-input" placeholder=" Owner's Name" /> 
       <input name="State" type="text" className="feedback-input" placeholder="State" />  
       <input name="Location" type="text" className="feedback-input" placeholder="Location" />  
