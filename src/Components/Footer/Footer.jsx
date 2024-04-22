@@ -33,7 +33,8 @@ Branch Office:
 </spam>
 Building- 57, Kalpaka Nagar, Chackai,<spam  className='thick'> Trivandrum , Kerala</spam>, Pin – 695024
 </p>
-<p> <spam  className='thick'>Upcoming Workshop: </spam><spam  className='thick'>Thrissur, Kerala </spam></p>
+<p> <spam  className='thick'>Thrissur address:</spam><spam  className='thick'>Officr A1, Deepa Apartment, venkitangu, Thrissur.
+Pincode : 680510 </spam></p>
                         </div>
                     
                 </Col>
