@@ -1,8 +1,15 @@
 import React from 'react';
 import './Form.scss'
+import { useAuth } from '../../Contexts/AuthContext';
 function Form() {
+  const { currentUser} = useAuth()
   return (
     <div className="alldetails">
+      <div className='welc-user'>
+      <h1 className='welc'>WELCOME</h1>
+      <h2>{currentUser && currentUser.email}</h2>
+      </div>
+      <h1 className='comp-loc'>Regestered Company Location:</h1>
     <form>
       <input name=" Owner;s name" type="text" className="feedback-input" placeholder=" Owner's Name" /> 
       <input name="State" type="text" className="feedback-input" placeholder="State" />  
