@@ -15,6 +15,8 @@ const process = {
   // Import Firebase and its modules
   import firebase from "firebase/compat/app";
   import "firebase/compat/auth";
+  import "firebase/firestore";
+  
   
   // Initialize Firebase app
   const app = firebase.initializeApp({
@@ -27,8 +29,11 @@ const process = {
       appId: process.env.REACT_APP_FIREBASE_APP_ID,
       measurementId:process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   });
-  
+
+
+
   // Export Firebase auth module
   export const auth = app.auth();
   export default app;
+
   

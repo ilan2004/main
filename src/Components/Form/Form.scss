@@ -100,4 +100,66 @@ textarea {
     font-weight:700;
   }
  
+}/* Form.scss */
+.alldetails {
+  /* Your existing styles for the main container */
+}
+
+/* Styles for the table */
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+/* Styles for the table data */
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #ddd;
+}
+
+/* Styles for the table cells */
+td {
+  padding: 8px;
+}
+
+/* Styles for the table header */
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+.left-side{
+  background-color: #064d3e;
+  color: #fff;
+}
+.Right-side{
+  background-color: #fff;
+  color: #117865;
+}
+.for-table{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.repai-opti{
+  color: black;
 }

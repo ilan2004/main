@@ -13,6 +13,7 @@ const Logindesktop = () => {
     const emailRef = useRef()
     const logemailRef = useRef()
     const nameRef = useRef()
+    const LocationRef = useRef()
     const passwordRef = useRef()
     const logpasswordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -22,12 +23,13 @@ const Logindesktop = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const name = nameRef.current.value;
+        const displayName = nameRef.current.value;
+        const Location = LocationRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const passwordConfirm = passwordConfirmRef.current.value;
 
-        if (!name || !email || !password || !passwordConfirm) {
+        if (!displayName || !email || !password || !location || !passwordConfirm) {
             enqueueSnackbar('Please fill in all details.', { variant: 'error' });
             return;
         }
@@ -40,12 +42,13 @@ const Logindesktop = () => {
         try {
             setError("");
             setLoading(true);
-            await signup(email, password);
+            await signup(email, password,displayName,Location);
             enqueueSnackbar('Account created successfully!', { variant: 'success' }); // Snackbar for successful account creation
-            form.current.reset();
             setTimeout(() => {
-                 navigate("/Form");
-             }, 1000);
+                navigate("/Form");
+            }, 1000);
+        
+           
         } catch {
             setError("Failed to create an account");
         }
@@ -79,23 +82,24 @@ const Logindesktop = () => {
     }
      return(
         <div className="logindesk">
-         <Components.Container>
-             <Components.SignUpContainer signinIn={signIn}>
-                 <Components.Form onSubmit={handleSubmit}>
-                     <Components.Title>Create Account</Components.Title>
-                     {currentUser && currentUser.email}
-                     <Components.Input ref={nameRef} type='text' placeholder='Name' />
-                     <Components.Input ref={emailRef} type='email' placeholder='Email' />
-                     <Components.Input ref={passwordRef} type='password' placeholder='Password' />
-                     <Components.Input ref={passwordConfirmRef} type='confirm-password' placeholder='confirm-Password' />
-                     <Components.Button disabled={loading}>Sign Up</Components.Button>
-                 </Components.Form>
-             </Components.SignUpContainer>
+    <Components.Container>
+        <Components.SignUpContainer signinIn={signIn}>
+            <Components.Form onSubmit={handleSubmit}>
+                <Components.Title>Create Account</Components.Title>
+                {currentUser && currentUser.Location}
+                <Components.Input ref={nameRef} type='text' placeholder='Name' />
+                <Components.Input ref={LocationRef} type='text' placeholder='Company Location' />
+                <Components.Input ref={emailRef} type='email' placeholder='Email' />
+                <Components.Input ref={passwordRef} type='password' placeholder='Password' />
+                <Components.Input ref={passwordConfirmRef} type='password' placeholder='Confirm Password' />
+                <Components.Button disabled={loading}>Sign Up</Components.Button>
+            </Components.Form>
+        </Components.SignUpContainer>
 
              <Components.SignInContainer signinIn={signIn}>
                   <Components.Form onSubmit={handleSubmitlogin} >
                       <Components.Title>Sign in</Components.Title>
-                      {currentUser && currentUser.email}
+                      {currentUser && currentUser.displayName}
                       <Components.Input ref={logemailRef}  type='email' placeholder='Email' />
                       <Components.Input ref={logpasswordRef}  type='password' placeholder='Password' />
                       <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
