@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
-import './Form.scss'
+import React, { useState, useEffect } from 'react';
+import './Form.scss';
+import { getAuth } from 'firebase/auth';
 import { useAuth } from '../../Contexts/AuthContext';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { addDoc, collection } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
-function Form() {
+const SnackForm = ({ userId }) =>{
+  const { enqueueSnackbar } = useSnackbar();
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
     ownerName: '',
     brand: '',
     VehicleModel: '',
-    kiloMeters: '',
-    Voltage: '',
-    Current: '',
+    chassisNumber: '', // Updated input name
+    registrationNumber: '', // Updated input name
+    BatteryVoltage: '', // Updated input name
+    BatteryCurrent: '', // Updated input name
     contactMobile: '',
     Repair: '',
     comment: ''
   });
   const [submittedData, setSubmittedData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,9 +37,10 @@ function Form() {
       ownerName: '',
       brand: '',
       VehicleModel: '',
-      kiloMeters: '',
-      Voltage: '',
-      Current: '',
+      chassisNumber: '',
+      registrationNumber: '',
+      BatteryVoltage: '',
+      BatteryCurrent: '',
       contactMobile: '',
       Repair: '',
       comment: ''
@@ -46,7 +54,7 @@ function Form() {
       // Access the current user's authentication information
       const auth = getAuth();
       const user = auth.currentUser;
-      
+
       if (!user) {
         throw new Error("User not authenticated");
       }
@@ -56,44 +64,46 @@ function Form() {
         ownerName: submittedData.ownerName,
         brand: submittedData.brand,
         VehicleModel: submittedData.VehicleModel,
-        kiloMeters: submittedData.kiloMeters,
-        Voltage: submittedData.Voltage,
-        Current: submittedData.Current,
+        chassisNumber: submittedData.chassisNumber,
+        registrationNumber: submittedData.registrationNumber,
+        BatteryVoltage: submittedData.BatteryVoltage,
+        BatteryCurrent: submittedData.BatteryCurrent,
         contactMobile: submittedData.contactMobile,
         Repair: submittedData.Repair,
         comment: submittedData.comment,
         // Include the user's UID in the form data
         userId: user.uid
       };
-  
+
       // Access Firestore
       const db = getFirestore();
-  
+
       // Send data to Firestore
       await addDoc(collection(db, "formData"), formData);
-  
+
       // Prepare data for email submission
       const templateParams = {
         ownerName: formData.ownerName,
         brand: formData.brand,
         VehicleModel: formData.VehicleModel,
-        kiloMeters: formData.kiloMeters,
-        Voltage: formData.Voltage,
-        Current: formData.Current,
+        chassisNumber: formData.chassisNumber,
+        registrationNumber: formData.registrationNumber,
+        BatteryVoltage: formData.BatteryVoltage,
+        BatteryCurrent: formData.BatteryCurrent,
         contactMobile: formData.contactMobile,
         Repair: formData.Repair,
         comment: formData.comment,
         userEmail: currentUser.email // Use the current user's email address as the recipient
       };
-  
+
       // Send email with form data to the current user's email address using EmailJS
       await emailjs.send('service_6fw3qz4', 'template_zevj6nm', templateParams, {
         publicKey: 'Qbcmn6dU4S2rOSw6O',
       });
-  
+
       // Reset form submission state
       setIsSubmitting(false);
-  
+
       // Optionally, you can add a success message or redirect the user
     } catch (error) {
       console.error("Error submitting form data:", error);
@@ -102,14 +112,53 @@ function Form() {
     }
   };
 
+  useEffect(() => {
+    if (currentUser) {
+      fetchUserLocation(currentUser.uid);
+    }
+  }, [currentUser]); // Fetch user location when currentUser changes
+
+  async function fetchUserLocation(userId) {
+    try {
+      const db = getFirestore();
+      const userRef = doc(db, 'users', userId);
+      const userSnapshot = await getDoc(userRef);
+      if (userSnapshot.exists()) {
+        setUserLocation(userSnapshot.data().Location);
+      } else {
+        console.log("User document does not exist");
+      }
+    } catch (error) {
+      console.error("Error fetching user location:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+  const toggleAdditionalFields = () => {
+    setShowAdditionalFields(!showAdditionalFields);
+    // Show or hide snackbar based on the visibility of additional fields
+    if (!showAdditionalFields) {
+      enqueueSnackbar('SERVICE/REPAIR FIELDS ON!', { variant: 'success' });
+
+    } else {
+      enqueueSnackbar('SERVICE/REPAIR FIELDS OFF!', { variant: 'warning' });
+    
+    }
+  };
+
   return (
+    <SnackbarProvider>
     <div className="alldetails">
       <div className='welc-user'>
         <h1 className='welc'>WELCOME</h1>
         <h2>{currentUser && currentUser.displayName}</h2>
       </div>
-      <h1 className='comp-loc'>Regestered Company Location:{currentUser && currentUser.Location} </h1>
-      
+      <h1 className='comp-loc'>Regestered Company Location: {userLocation}</h1>
+      <div className="repairbut">
+      <button className="Repair" onClick={toggleAdditionalFields}>SERVICE/REPAIR</button>
+      </div>
       <form className='form-fill' onSubmit={handleSubmit}>
         <input
           name="ownerName"
@@ -136,28 +185,36 @@ function Form() {
           onChange={(e) => setFormData({ ...formData, VehicleModel: e.target.value })}
         />
         <input
-          name="kiloMeters"
+          name="chassisNumber"
           type="text"
           className="feedback-input"
-          placeholder="Vehicle kiloMeters"
-          value={formData.kiloMeters}
-          onChange={(e) => setFormData({ ...formData, kiloMeters: e.target.value })}
+          placeholder="Chassis Number/ Motor Number:"
+          value={formData.chassisNumber}
+          onChange={(e) => setFormData({ ...formData, chassisNumber: e.target.value })}
         />
         <input
-          name="Voltage"
+          name="registrationNumber"
+          type="number"
+          className="feedback-input"
+          placeholder="Vehicle Registration Number: "
+          value={formData.registrationNumber}
+          onChange={(e) => setFormData({ ...formData, registrationNumber: e.target.value })}
+        />
+        <input
+          name="BatteryVoltage"
           type="number"
           className="feedback-input"
           placeholder="Battery Voltage"
-          value={formData.Voltage}
-          onChange={(e) => setFormData({ ...formData, Voltage: e.target.value })}
+          value={formData.BatteryVoltage}
+          onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
         />
         <input
-          name="Current"
+          name="BatteryCurrent"
           type="number"
           className="feedback-input"
           placeholder="Battery Current"
-          value={formData.Current}
-          onChange={(e) => setFormData({ ...formData, Current: e.target.value })}
+          value={formData.BatteryCurrent}
+          onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
         />
         <input
           name="contactMobile"
@@ -167,6 +224,34 @@ function Form() {
           value={formData.contactMobile}
           onChange={(e) => setFormData({ ...formData, contactMobile: e.target.value })}
         />
+        {showAdditionalFields && (
+          <>
+            <input
+              name="VehiclekiloMeters"
+              type="text"
+              className="feedback-input"
+              placeholder="Vehicle kiloMeters"
+              value={formData.VehiclekiloMeters}
+              onChange={(e) => setFormData({ ...formData, VehiclekiloMeters: e.target.value })}
+            />
+            <input
+              name="Battery Voltage "
+              type="text"
+              className="feedback-input"
+              placeholder="BatteryVoltage"
+              value={formData.BatteryVoltage}
+              onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
+            />
+            <input
+              name="BatteryCurrent"
+              type="text"
+              className="feedback-input"
+              placeholder="Additional Field 2"
+              value={formData.BatteryCurrent}
+              onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
+            />
+          </>
+        )}
         <select
           name="Repair"
           className="feedback-input"
@@ -183,7 +268,7 @@ function Form() {
           value={formData.comment}
           onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
         ></textarea>
-        <input type="submit" value="SUBMIT"/>
+        <input type="submit" value="SUBMIT" />
       </form>
       <div className="for-table">
         {/* Render table if form is submitted */}
@@ -207,16 +292,20 @@ function Form() {
                 <td className='Right-side'>{submittedData.VehicleModel}</td>
               </tr>
               <tr>
-                <td className='left-side'>Vehicle kiloMeters</td>
-                <td className='Right-side'>{submittedData.kiloMeters}</td>
+                <td className='left-side'>Chassis Number/ Motor Number:</td>
+                <td className='Right-side'>{submittedData.chassisNumber}</td>
+              </tr>
+              <tr>
+                <td className='left-side'>Vehicle Registration Number:</td>
+                <td className='Right-side'>{submittedData.registrationNumber}</td>
               </tr>
               <tr>
                 <td className='left-side'>Battery Voltage</td>
-                <td className='Right-side'>{submittedData.Voltage}</td>
+                <td className='Right-side'>{submittedData.BatteryVoltage}</td>
               </tr>
               <tr>
-                <td className='left-side'>Battery current</td>
-                <td className='Right-side'>{submittedData.Current}</td>
+                <td className='left-side'>Battery Current</td>
+                <td className='Right-side'>{submittedData.BatteryCurrent}</td>
               </tr>
               <tr>
                 <td className='left-side'>contact Mobile</td>
@@ -236,7 +325,15 @@ function Form() {
         </button>
       </div>
     </div>
+    </SnackbarProvider>
   );
 }
+const Form = () => {
+  return (
+    <SnackbarProvider>
+      <SnackForm />
+    </SnackbarProvider>
+  );
+};
 
 export default Form;

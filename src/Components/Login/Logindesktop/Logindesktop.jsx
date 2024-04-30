@@ -29,7 +29,7 @@ const Logindesktop = () => {
         const password = passwordRef.current.value;
         const passwordConfirm = passwordConfirmRef.current.value;
 
-        if (!displayName || !email || !password || !location || !passwordConfirm) {
+        if (!displayName || !email || !password || !Location || !passwordConfirm) {
             enqueueSnackbar('Please fill in all details.', { variant: 'error' });
             return;
         }
@@ -39,19 +39,22 @@ const Logindesktop = () => {
             return;
         }
 
-        try {
-            setError("");
-            setLoading(true);
-            await signup(email, password,displayName,Location);
-            enqueueSnackbar('Account created successfully!', { variant: 'success' }); // Snackbar for successful account creation
+        setError("");
+        setLoading(true);
+        signup(email, password, displayName, Location)
+          .then(() => {
+            enqueueSnackbar('Account created successfully!', { variant: 'success' });
+            console.log("Account created successfully");
             setTimeout(() => {
-                navigate("/Form");
+              navigate("/Form");
             }, 1000);
-        
-           
-        } catch {
+          })
+          .catch((error) => {
+            console.error("Error creating account:", error);
             setError("Failed to create an account");
-        }
+            setLoading(false);
+          });
+        
 
         setLoading(false);
     }

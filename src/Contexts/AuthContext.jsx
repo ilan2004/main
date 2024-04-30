@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase"; // assuming you have firestore imported from firebase
 import { Firestore } from "firebase/firestore";
 import { collection,addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 const AuthContext = React.createContext();
 
@@ -12,8 +13,10 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [userLocation, setUserLocation] = useState(null); // New state for user location
 
-  function signup(email, password, displayName, Location) {
+
+ function signup(email, password, displayName, Location) {
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -23,7 +26,7 @@ export function AuthProvider({ children }) {
         }).then(() => {
           // Add the location data to Firestore
           const db = getFirestore();
-          const userRef = collection(db, 'users').doc(userCredential.user.uid);
+          const userRef = doc(collection(db, 'users'), userCredential.user.uid);
           return setDoc(userRef, { Location: Location }, { merge: true });
           //                                    ^^^^^^^^ Use 'Location' instead of 'location'
         });
@@ -66,10 +69,27 @@ export function AuthProvider({ children }) {
 
     return unsubscribe;
   }, []);
+  async function fetchUserLocation(userId) {
+    try {
+      const db = getFirestore();
+      const userRef = doc(db, 'users', userId);
+      const userSnapshot = await getDoc(userRef);
+      if (userSnapshot.exists()) {
+        setUserLocation(userSnapshot.data().Location);
+      } else {
+        console.log("User document does not exist");
+      }
+    } catch (error) {
+      console.error("Error fetching user location:", error);
+    }
+  }
+
+
 
   const value = {
     currentUser,
     login,
+    userLocation,
     signup,
     logout,
     resetPassword,

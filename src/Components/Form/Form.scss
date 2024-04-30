@@ -163,3 +163,23 @@ th {
 .repai-opti{
   color: black;
 }
+.repairbut{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Repair{
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+
+  background:#117865;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:20px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
