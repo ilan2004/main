@@ -170,7 +170,6 @@ th {
 }
 .Repair{
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-
   background:#117865;
   border-radius:5px;
   border:0;
@@ -178,8 +177,33 @@ th {
   color:white;
   font-size:20px;
   padding-top:10px;
-  padding-bottom:10px;
+  padding:10px;
   transition: all 0.3s;
-  margin-top:-4px;
+  margin: 10px;
   font-weight:700;
+}
+.welc-user{
+  display: flex;
+  flex-direction: row;
+  gap:40px
+}
+.comp-loc{
+  width:300px;
+  font-size: 1.5rem;
+}
+.cur-loc{
+  color: #117865;
+
+}
+.costof{
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.years{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
 }

@@ -147,17 +147,22 @@ const SnackForm = ({ userId }) =>{
     
     }
   };
+  const [year, setYear] = useState('');
 
+  const handleYearClick = (selectedYear) => {
+    setYear(selectedYear);
+  };
   return (
     <SnackbarProvider>
     <div className="alldetails">
       <div className='welc-user'>
-        <h1 className='welc'>WELCOME</h1>
-        <h2>{currentUser && currentUser.displayName}</h2>
+        <h2 className='welc'>WELCOME {currentUser && currentUser.displayName}</h2>
+        <h2 className='comp-loc'>Regestered Company Location: <spam className="cur-loc">{userLocation}</spam></h2>
       </div>
-      <h1 className='comp-loc'>Regestered Company Location: {userLocation}</h1>
+    
       <div className="repairbut">
       <button className="Repair" onClick={toggleAdditionalFields}>SERVICE/REPAIR</button>
+      <button className="Repair">Extended Warranty</button>
       </div>
       <form className='form-fill' onSubmit={handleSubmit}>
         <input
@@ -319,10 +324,16 @@ const SnackForm = ({ userId }) =>{
           </table>
         )}
       </div>
-      <div className="button-div">
-        <button className="table-submit" onClick={handleFormSubmit} disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+      <div className="years">
+        <button className="2" onClick={() => handleYearClick('2 Years')}>
+          2 Years E.Warranty
         </button>
+        <button className="5year" onClick={() => handleYearClick('5 Years')}>
+          5 Years E.Warranty
+        </button>
+      </div>
+      <div className="costof">
+        <h3>Cost of --{year}-- Warranty will be ------</h3>
       </div>
     </div>
     </SnackbarProvider>
