@@ -41,7 +41,7 @@ Pincode : 680510 </spam></p>
                 <Col sm={6} className= "text-center text-sm-end">
                     <div className='social-icon'>
                     <a href=''><img src={navIcon1}/></a>
-                    <a href=''><img src={navIcon2}/></a>
+                    <a href='https://www.facebook.com/profile.php?id=61559168102771'><img src={navIcon2}/></a>
                     <a className='vvda' href="https://wa.me/918304963000"><img src={navicon3}/></a>
                     </div>
                     <p className='mail' onClick={handleEmailClick}>Email: {emailAddress}</p>
