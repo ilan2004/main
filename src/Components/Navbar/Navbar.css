@@ -8,7 +8,7 @@ nav.navbar {
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: #117865;
+    background-color: #F6F6F2;
 
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8); /* Adjust values as needed */
       }
@@ -28,7 +28,7 @@ nav.navbar {
     
       nav.navbar .navbar-nav .nav-link.navbar-link {
         font-weight: 400;
-        color: #fff !important;
+        color: #388087 !important;
         letter-spacing: 0.8px;
         padding: 0 25px;
         font-size: 18px;
@@ -241,7 +241,7 @@ nav.navbar {
 
   nav.navbar .navbar-nav .nav-link.navbar-link {
     font-weight: 400;
-    color: #fff !important;
+    color: #0d828d !important;
     letter-spacing: 0.8px;
     padding: 0 25px;
     font-size: 18px;
@@ -462,10 +462,10 @@ nav.navbar {
   }
 
   .navbar-link{
-    color: #fff;
+    color: #0d828d !important;
     font-size: 1.1rem;
   }
   .navbar-link:hover{
     text-decoration: none;
-    color:#cecbcb;
+  
   }

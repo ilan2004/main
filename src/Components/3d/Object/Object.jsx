@@ -55,12 +55,12 @@ return (
   
     }}>
     <Suspense fallback={<Loader/>}>
-      <directionalLight position={[5, 1, 10]} intensity={3} color="#ff8c00" />
-      <ambientLight intensity={1} color="#00FF00" />
-      <spotLight intensity={26} color="#00FF00" position={[5, 1, 10]} angle={Math.PI / 4} penumbra={0.05} />
+      <directionalLight position={[5, 1, 10]} intensity={2} color="#BADFE7" />
+      <ambientLight intensity={1} color="#3BD3E2" />
+      <spotLight intensity={26} color="#3BD3E2" position={[5, 1, 10]} angle={Math.PI / 4} penumbra={0.05} />
       <hemisphereLight skycolor="#b1e1ff" intensity={0.5} groundColor="#ff8c00" />
       {/* <PerspectiveCamera ref={cameraRef} makeDefault /> */}
-      <pointLight intensity={700} color="#00FF00" position={[-5, 1, -10]} distance={20} />
+      <pointLight intensity={700} color="#3BD3E2" position={[-5, 1, -10]} distance={20} />
   
 
         <Model/>

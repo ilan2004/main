@@ -12,7 +12,7 @@ const Home = () => {
     const isInView = useInView(ref, { once: true });
   return (
     <div>
-        <img className='Wave' src={Wave} ref={ref} style={{ opacity: isInView ? 1 : 0, transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s" }} />
+        {/* <img className='Wave' src={Wave} ref={ref} style={{ opacity: isInView ? 1 : 0, transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s" }} /> */}
         <Hero path="Home" />
             <Three />
             <Services path="Services" />
