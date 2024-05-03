@@ -5,7 +5,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
-import logo from '../../assets/img/Hertz.png';
+import logo from '../../assets/img/dion.png';
 import Header from './Header';
 import { useAuth } from '../../Contexts/AuthContext';
 const Navbars = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/img/Hertz.png';
+import logo from '../../assets/img/dion.png';
 import navIcon1 from '../../assets/img/nav-icon1.svg';
 import navIcon2 from '../../assets/img/nav-icon2.svg';
 import navicon3 from '../../assets/img/whatsapp.svg';
