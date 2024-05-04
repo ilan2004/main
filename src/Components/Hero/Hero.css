@@ -10,7 +10,7 @@
 .Head{
     height: 500px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     text-align: center;
@@ -26,9 +26,10 @@
 }
 .h11{
     text-align: center;
-    font-size: 5.5rem;
+    font-size: 4.5rem;
     font-weight: 600;
     color:#388087;
+    justify-content: center;
     
 
 }
@@ -42,6 +43,8 @@
     -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
     color: transparent;
     font-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
 }
 .blob{
     opacity: 0.16;
@@ -55,7 +58,20 @@
     font-weight: 600;
     color:#009A89;
 }
-@media only screen and (max-width: 768px) {
+.p1{
+    width:55vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.p2{
+    width:40vw;
+    display: flex;
+    color: #009A89;
+}
+  
+@media (max-width: 768px) {
     .Hero {
         flex-direction: column;
         padding-top: 20px; /* Adjust as needed */
@@ -72,7 +88,7 @@
     }
 
     .h11 {
-        font-size: 4rem; /* Adjust font size as needed */
+        font-size: 3rem; /* Adjust font size as needed */
     }
 
     .p11 {
@@ -82,6 +98,10 @@
         text-align: center;
         font-size: 2rem;
     }
-  
+ 
+    .p2{
+
+        display: none;
+    }
 }
-  
+

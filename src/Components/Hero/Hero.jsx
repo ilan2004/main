@@ -18,20 +18,25 @@ import UseMousePosition from '../Utilitis/useMousePosition';
         opacity: isInView ? 1 : 0,
         transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.8s"
       }}>
-            
+            <div className="p1">
             <h1  className='h11' > 
-                DION POWER
-                <span  className='solutions'> ELECTRIC VEHICLE SOLUTIONS</span>
+            Dion power solutions
+                <span  className='solutions'> Revolutionize your ride </span>
             </h1>
             <p className='p11' >
-                Advance BMS Developers
+            One stop solution for all your lithium batteries 
+
             </p >
             <p className='next' >
                 Battery Extended Warranty Services
             </p >
+            </div>
+            
             <img onMouseEnter={textEnter} onMouseLeave={textLeave} src={Blob} className='blob' />
         </div>
-       
+        <div className="p2">
+              <p>Here at Dion Power Solutions, our mission revolves around enhancing the performance and sustainability of two-wheelers and three-wheelers through advanced lithium battery solutions. With a keen focus on these vehicles, we're dedicated to optimizing their power and range while minimizing environmental impact. Our comprehensive range of services includes tailored lithium battery manufacturing, ensuring that each battery meets the specific needs of two-wheelers and three-wheelers. Additionally, we offer extended warranties to guarantee the reliability and longevity of our batteries, providing peace of mind to riders and operators alike. Join us as we drive the evolution of electric mobility for two-wheelers and three-wheelers with Dion Power Solutions.</p>
+            </div>
     </div>
     
   )
