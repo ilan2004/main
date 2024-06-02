@@ -12,6 +12,8 @@ import { AuthProvider } from "./Contexts/AuthContext";
 import Home from "./Pages/Home";
 import Connect from "./Pages/Connect";
 import Form from "./Components/Form/Form";
+import Layout from "./Components/Dashboard/shared/Layout";
+import Dashboard from "./Pages/Dashboard";
 
 export default function App() {
   const ref = useRef(null);
@@ -28,19 +30,17 @@ export default function App() {
       <div className="App">
         <ReactLenis root>
           <div className="app">
-            <Navbars />
+        
             <Routes >
             
             <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<Connect/>}/>
-            <Route path="/Form"
-
-                element={
-                  <PrivateRoute>
-                    <Form />
-                  </PrivateRoute>
-                }
-              ></Route>
+            <Route path="/Dashboard" element={<Layout />}>
+                    <Route index element={<Dashboard />} />
+                </Route>
+            <Route path="/Form" element={<Layout />}>
+                    <Route index element={<Form />} />
+            </Route>
               
             </Routes>
             <Footer />

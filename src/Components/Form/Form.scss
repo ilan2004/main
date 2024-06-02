@@ -1,10 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-body { background:rgb(30,30,40); }
-form { max-width:420px; margin:50px auto; }
+form {  }
+.alldetails{
+  // background:rgb(30,30,40);
+  height: auto;
 
+}
+.form-fill{
+  justify-content: center;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
 .feedback-input {
-  color:white;
+  color:black;
   font-family: Helvetica, Arial, sans-serif;
   font-weight:500;
   font-size: 18px;
@@ -13,9 +22,9 @@ form { max-width:420px; margin:50px auto; }
   background-color: transparent;
   border:2px solid #117865;
   transition: all 0.3s;
-  padding: 13px;
+  padding: 10px;
   margin-bottom: 15px;
-  width:100%;
+  width:70%;
   box-sizing: border-box;
   outline:0;
 }
@@ -30,7 +39,7 @@ textarea {
 
 [type="submit"] {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  width: 100%;
+  width: 40%;
   background:#117865;
   border-radius:5px;
   border:0;
@@ -44,9 +53,7 @@ textarea {
   font-weight:700;
 }
 [type="submit"]:hover { background:#117865; }
-.alldetails{
-    padding-top: 150px;
-}
+
 .welc-user{
   color:#fff;
   display: flex;
@@ -83,6 +90,8 @@ textarea {
     display:flex;
     align-items: center;
     flex-direction: column;
+    width: 100vw;
+    flex-wrap: wrap;
   }
   [type="submit"] {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -102,7 +111,7 @@ textarea {
  
 }/* Form.scss */
 .alldetails {
-  /* Your existing styles for the main container */
+
 }
 
 /* Styles for the table */
@@ -196,14 +205,64 @@ th {
 
 }
 .costof{
-  color: #fff;
+  color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size:24px;
+  font-weight:700;
+  margin-top: 30px;
 }
 .years{
  display: flex;
   justify-content: center;
   align-items: center;
   gap:10px;
+
+  
+}
+.two{
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    width: 50%;
+    background:#117865;
+    border-radius:5px;
+    border:0;
+    cursor:pointer;
+    color:white;
+    font-size:24px;
+    padding-top:10px;
+    padding-bottom:10px;
+    transition: all 0.3s;
+    margin-top:30px;
+    font-weight:700;
+}
+.fiveyear{
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 50%;
+  background:#117865;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:24px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:30px;
+  font-weight:700;
+}
+.table-submit{
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    width: 50%;
+    background:#117865;
+    border-radius:5px;
+    border:0;
+    cursor:pointer;
+    color:white;
+    font-size:24px;
+    padding-top:10px;
+    padding-bottom:10px;
+    transition: all 0.3s;
+    margin-top:30px;
+    font-weight:700;
 }

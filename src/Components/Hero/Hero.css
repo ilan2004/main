@@ -6,6 +6,7 @@
     padding-top: 50px;
     background:#F6F6F2;
     height: 100vh;
+    
 }
 .Head{
     height: 500px;
@@ -28,24 +29,29 @@
     text-align: center;
     font-size: 4.5rem;
     font-weight: 600;
-    color:#388087;
+    background: linear-gradient(120deg,#0599aa, #09238d, #0599aa);
+    -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
+    color: transparent;
     justify-content: center;
     
 
 }
 .p11{
     text-align: justify;
-    color: #009A89;
+    background: linear-gradient(120deg,#0599aa, #09238d, #0599aa);
+    -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
+    color: transparent;
     font-size: 2rem;
 }
 .solutions{
-    background: linear-gradient(120deg, #388087, #6FB3B8);
+    background: linear-gradient(120deg,#0599aa, #09238d, #09238d);
     -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
     color: transparent;
     font-size: 2.5rem;
     align-items: center;
     justify-content: center;
 }
+
 .blob{
     opacity: 0.16;
     position: absolute;
@@ -76,32 +82,58 @@
         flex-direction: column;
         padding-top: 20px; /* Adjust as needed */
     }
-
+    .solutions{
+      background: linear-gradient(120deg,#0599aa, #09238d, #09238d);
+      -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
+      color: transparent;
+      font-size: 1.5rem;
+      align-items: center;
+      justify-content: center;
+  }
     .Head {
         height: auto; /* Adjust height as needed */
-        padding: 20px;
-    }
+        width: 100%;
+        padding-left: 10px;
+         } 
 
     .Car {
         height: auto; /* Adjust height as needed */
-        width: 80%; /* Adjust width as needed */
+        width: 100%; /* Adjust width as needed */
     }
 
     .h11 {
-        font-size: 3rem; /* Adjust font size as needed */
+        font-size: 2.2rem; /* Adjust font size as needed */
     }
 
     .p11 {
-        font-size: 1.5rem; /* Adjust font size as needed */
+        font-size: 1.1rem; /* Adjust font size as needed */
     }
     .next{
         text-align: center;
         font-size: 2rem;
     }
- 
+    .p1{
+      width: 100%;
+    }
     .p2{
 
         display: none;
     }
 }
 
+@keyframes gradient {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+  
+  .gradient {
+    animation: gradient 8s linear infinite;
+  }
+.etrad{
+  background: linear-gradient(to right, #df19b5 33.33%,#2989d8 66.66%,#207cca 100%,#0597dd 100%);
+  font-weight: 600;
+  -webkit-background-clip: text; /* For webkit browsers like Chrome and Safari */
+  color: transparent;
+  font-size: 1.2rem;
+}

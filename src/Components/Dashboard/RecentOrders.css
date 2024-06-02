@@ -1,0 +1,42 @@
+/* styles.css */
+
+/* Container */
+.container-Order {
+    background-color: #ffffff; /* Adjust background color as needed */
+    padding: 1rem; /* Adjust padding as needed */
+    border: 1px solid #e5e5e5; /* Adjust border as needed */
+    border-radius: 0.25rem; /* Adjust border radius as needed */
+    width: 80vw;
+    height: 80vh;
+  }
+  
+  /* Header */
+
+  
+  /* Table */
+  .table {
+    width: 100%;
+    color: #374151; /* Adjust color as needed */
+  }
+  
+  /* Table Head */
+  .table-head {
+    font-weight: 500; /* Adjust font weight as needed */
+  }
+  
+  /* Table Row */
+  .table-row {
+    border-bottom: 1px solid #e5e5e5; /* Adjust border color as needed */
+  }
+  
+  /* Table Cell */
+  .table-cell {
+    padding: 0.5rem; /* Adjust padding as needed */
+  }
+  
+  /* Table Link */
+  .table-link {
+    color: #2563eb; /* Adjust color as needed */
+    text-decoration: none;
+  }
+  

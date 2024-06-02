@@ -1,16 +1,16 @@
 // Manually define process for the browser environment
 const process = {
-    env: {
-      REACT_APP_FIREBASE_API_KEY: 'AIzaSyBS4WP-vrskQfN0S5rQ70ualDP69LPOZx8',
-      REACT_APP_FIREBASE_AUTH_DOMAIN: 'hertzev-4f4cd.firebaseapp.com',
-      REACT_APP_FIREBASE_DATABASE_URL: 'https://hertzev-4f4cd.firebaseapp.com',
-      REACT_APP_FIREBASE_PROJECT_ID: 'hertzev-4f4cd',
-      REACT_APP_FIREBASE_STORAGE_BUCKET: 'hertzev-4f4cd.appspot.com',
-      REACT_APP_FIREBASE_MESSAGING_SENDER_ID: '336596379476',
-      REACT_APP_FIREBASE_APP_ID: '1:336596379476:web:c8f8cad7ddd342a5164ac1',
-      REACT_APP_FIREBASE_MEASUREMENT_ID: 'G-MKGPJMP4PZ'
-    }
-  };
+  env: {
+    REACT_APP_FIREBASE_API_KEY: 'AIzaSyACYE9W2Qgf3Yb2F6hpl-wzKBIalJzIJnI',
+    REACT_APP_FIREBASE_AUTH_DOMAIN: 'trial-b5cf0.firebaseapp.com',
+    REACT_APP_FIREBASE_DATABASE_URL: 'https://trial-b5cf0.firebaseapp.com',
+    REACT_APP_FIREBASE_PROJECT_ID: 'trial-b5cf0',
+    REACT_APP_FIREBASE_STORAGE_BUCKET: 'trial-b5cf0.appspot.com',
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID: '643987288928',
+    REACT_APP_FIREBASE_APP_ID: '1:643987288928:web:85d72cddd92b1fdd426405',
+    REACT_APP_FIREBASE_MEASUREMENT_ID: 'G-77KY14D682'
+  }
+};
   
   // Import Firebase and its modules
   import firebase from "firebase/compat/app";

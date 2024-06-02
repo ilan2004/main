@@ -30,7 +30,7 @@
   }
   .thick{
     font-weight: 700;
-
+   
   }
   @media (max-width: 768px){
     .footer{
@@ -43,3 +43,33 @@
       font-size: 1rem;;
     }
   }
+  .workshop{
+    border-top: black;
+    border-width: 0.1cap;
+    border-bottom: transparent;
+    border-right: transparent;
+    border-left: transparent;
+    border-style:groove;
+  }
+.allad{
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+.ad1{
+  width: 30%;
+}
+.ad2{
+  width:80%;
+}
+.allad2{
+  display: flex;
+  flex-direction: row;
+  border-top: black;
+    border-width: 0.1cap;
+    border-bottom: transparent;
+    border-right: transparent;
+    border-left: transparent;
+    border-style:groove;
+    padding-top: 10px;
+}

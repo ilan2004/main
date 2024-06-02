@@ -11,11 +11,11 @@ const SnackForm = ({ userId }) =>{
   const { enqueueSnackbar } = useSnackbar();
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
-    ownerName: '',
+
     brand: '',
     VehicleModel: '',
     chassisNumber: '', // Updated input name
-    registrationNumber: '', // Updated input name
+    servicenumber: '', // Updated input name
     BatteryVoltage: '', // Updated input name
     BatteryCurrent: '', // Updated input name
     contactMobile: '',
@@ -34,11 +34,11 @@ const SnackForm = ({ userId }) =>{
     setSubmittedData(formData);
     // Reset the form
     setFormData({
-      ownerName: '',
+
       brand: '',
       VehicleModel: '',
       chassisNumber: '',
-      registrationNumber: '',
+      servicenumber: '',
       BatteryVoltage: '',
       BatteryCurrent: '',
       contactMobile: '',
@@ -61,11 +61,11 @@ const SnackForm = ({ userId }) =>{
 
       // Prepare data for submission
       const formData = {
-        ownerName: submittedData.ownerName,
+
         brand: submittedData.brand,
         VehicleModel: submittedData.VehicleModel,
         chassisNumber: submittedData.chassisNumber,
-        registrationNumber: submittedData.registrationNumber,
+        servicenumber: submittedData.servicenumber,
         BatteryVoltage: submittedData.BatteryVoltage,
         BatteryCurrent: submittedData.BatteryCurrent,
         contactMobile: submittedData.contactMobile,
@@ -83,11 +83,10 @@ const SnackForm = ({ userId }) =>{
 
       // Prepare data for email submission
       const templateParams = {
-        ownerName: formData.ownerName,
         brand: formData.brand,
         VehicleModel: formData.VehicleModel,
         chassisNumber: formData.chassisNumber,
-        registrationNumber: formData.registrationNumber,
+        servicenumber: formData.servicenumber,
         BatteryVoltage: formData.BatteryVoltage,
         BatteryCurrent: formData.BatteryCurrent,
         contactMobile: formData.contactMobile,
@@ -140,10 +139,10 @@ const SnackForm = ({ userId }) =>{
     setShowAdditionalFields(!showAdditionalFields);
     // Show or hide snackbar based on the visibility of additional fields
     if (!showAdditionalFields) {
-      enqueueSnackbar('SERVICE/REPAIR FIELDS ON!', { variant: 'success' });
+      enqueueSnackbar('Extended Warranty FIELDS ON!', { variant: 'success' });
 
     } else {
-      enqueueSnackbar('SERVICE/REPAIR FIELDS OFF!', { variant: 'warning' });
+      enqueueSnackbar('Extended Warranty FIELDS OFF!', { variant: 'warning' });
     
     }
   };
@@ -155,24 +154,11 @@ const SnackForm = ({ userId }) =>{
   return (
     <SnackbarProvider>
     <div className="alldetails">
-      <div className='welc-user'>
-        <h2 className='welc'>WELCOME {currentUser && currentUser.displayName}</h2>
-        <h2 className='comp-loc'>Regestered Company Location: <spam className="cur-loc">{userLocation}</spam></h2>
-      </div>
-    
       <div className="repairbut">
-      <button className="Repair" onClick={toggleAdditionalFields}>SERVICE/REPAIR</button>
-      <button className="Repair">Extended Warranty</button>
+      <button className="Repair" >SERVICE/REPAIR</button>
+      <button className="Repair" onClick={toggleAdditionalFields}>Extended Warranty</button>
       </div>
       <form className='form-fill' onSubmit={handleSubmit}>
-        <input
-          name="ownerName"
-          type="text"
-          className="feedback-input"
-          placeholder="Owner's Name"
-          value={formData.ownerName}
-          onChange={(e) => setFormData({ ...formData, ownerName: e.target.value })}
-        />
         <input
           name="brand"
           type="text"
@@ -198,12 +184,12 @@ const SnackForm = ({ userId }) =>{
           onChange={(e) => setFormData({ ...formData, chassisNumber: e.target.value })}
         />
         <input
-          name="registrationNumber"
+          name="servicenumber"
           type="number"
           className="feedback-input"
-          placeholder="Vehicle Registration Number: "
+          placeholder="Battery Service Number: "
           value={formData.registrationNumber}
-          onChange={(e) => setFormData({ ...formData, registrationNumber: e.target.value })}
+          onChange={(e) => setFormData({ ...formData, servicenumber: e.target.value })}
         />
         <input
           name="BatteryVoltage"
@@ -257,15 +243,7 @@ const SnackForm = ({ userId }) =>{
             />
           </>
         )}
-        <select
-          name="Repair"
-          className="feedback-input"
-          value={formData.Repair}
-          onChange={(e) => setFormData({ ...formData, Repair: e.target.value })}
-        >
-          <option className='repai-opti' value="service">Service</option>
-          <option className='repai-opti' value="repair">Repair</option>
-        </select>
+
         <textarea
           name="comment"
           className="feedback-input"
@@ -273,7 +251,7 @@ const SnackForm = ({ userId }) =>{
           value={formData.comment}
           onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
         ></textarea>
-        <input type="submit" value="SUBMIT" />
+        <input  type="submit" value="SUBMIT" />
       </form>
       <div className="for-table">
         {/* Render table if form is submitted */}
@@ -283,10 +261,6 @@ const SnackForm = ({ userId }) =>{
               <tr>
                 <th>Field</th>
                 <th>Value</th>
-              </tr>
-              <tr>
-                <td className='left-side'>Owner's Name</td>
-                <td className='Right-side'>{submittedData.ownerName}</td>
               </tr>
               <tr>
                 <td className='left-side'>Vehicle Brand</td>
@@ -301,8 +275,8 @@ const SnackForm = ({ userId }) =>{
                 <td className='Right-side'>{submittedData.chassisNumber}</td>
               </tr>
               <tr>
-                <td className='left-side'>Vehicle Registration Number:</td>
-                <td className='Right-side'>{submittedData.registrationNumber}</td>
+                <td className='left-side'>Battery Service Number:</td>
+                <td className='Right-side'>{submittedData.servicenumber}</td>
               </tr>
               <tr>
                 <td className='left-side'>Battery Voltage</td>
@@ -320,21 +294,29 @@ const SnackForm = ({ userId }) =>{
                 <td className='left-side'>Comment</td>
                 <td className='Right-side'>{submittedData.comment}</td>
               </tr>
-            </tbody>
-          </table>
-        )}
+              <div className="button-div">
+        <button className="table-submit" onClick={handleFormSubmit} disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Submit'}
+        </button>
       </div>
       <div className="years">
-        <button className="2" onClick={() => handleYearClick('2 Years')}>
+        <button className="two" onClick={() => handleYearClick('2 Years')}>
           2 Years E.Warranty
         </button>
-        <button className="5year" onClick={() => handleYearClick('5 Years')}>
+        <button className="fiveyear" onClick={() => handleYearClick('5 Years')}>
           5 Years E.Warranty
         </button>
       </div>
       <div className="costof">
         <h3>Cost of --{year}-- Warranty will be ------</h3>
       </div>
+            </tbody>
+          </table>
+          
+        )}
+      </div>
+      
+      
     </div>
     </SnackbarProvider>
   );

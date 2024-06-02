@@ -41,7 +41,11 @@ const Navbars = () => {
     };
   }, [scrolledBeyond100vh]);
 
-
+  const handleClick = (e) => {
+    e.preventDefault(); // Prevent the default link behavior
+    const url = currentUser ? '/Dashboard' : '/Login';
+    window.open(url, '_blank'); // Open the URL in a new tab
+  };
 //smooth scroll
 
   return (
@@ -96,15 +100,17 @@ const Navbars = () => {
             </ScrollLink>
             
             <Link
-            to={currentUser ? '/Form' : '/Login'} // Check if user is logged in
+            href={currentUser ? '/Dashboard' : '/Login'}
+            onClick={handleClick}// Check if user is logged in
               className={activeLink === '#Login' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
               >
               Account
             </Link>
+            
           </Nav>
           <span className='navbar-text'>
             <button className='vvd'>
-              <a className='vvda' href='https://wa.me/917349344224'>
+              <a className='vvda' href='https://wa.me/918304963000'>
                 <span>Let's Connect</span>
               </a>
             </button>

@@ -1,7 +1,7 @@
-import Battery1 from '../../assets/img/Battery1.jpg';
-import Battery2 from '../../assets/img/Battery2.webp';
-import Battery3 from '../../assets/img/Battery3.jpg';
-import Recharge from '../../assets/img/recharge.jpeg';
+import Battery1 from '../../assets/img/auto.jpeg';
+import Battery2 from '../../assets/img/scooter.jpg';
+import Battery3 from '../../assets/img/car.jpg';
+import Recharge from '../../assets/img/lithbat.webp';
 
 
 

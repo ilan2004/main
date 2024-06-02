@@ -7,7 +7,7 @@ import './Footer.css'
 import {Col,Row,Container} from 'react-bootstrap';
  const Footer = () => {
     const phoneNumber = "+918304963000";
-    const emailAddress = "Hertzevsolutions@gmail.com";
+    const emailAddress = "info@dionpower.in";
 
     const handlePhoneClick = () => {
         window.location.href = `tel:${phoneNumber}`;
@@ -25,17 +25,23 @@ import {Col,Row,Container} from 'react-bootstrap';
                     <div className="num">
                             
                             
-<p><spam  className='thick'>Head Office :</spam> Office # 388, 7th Main 8th Cross, Mico Layout,<spam className='thick'> Bangalore , Karnataka,</spam> Pin- 560076.
-</p>
-<p>
+<div className='allad'> <div className="ad1"><spam  className='thick'>Head Office :</spam></div><div className="ad2"> Office # 388, 7th Main 8th Cross, Mico Layout,<spam className='thick'> Bangalore , Karnataka,</spam> Pin : 560076.</div>
+</div>
+<div className='allad'> <div className="ad1">
 <spam  className='thick'>
 Branch Office:
 </spam>
-Building- 57, Kalpaka Nagar, Chackai,<spam  className='thick'> Trivandrum , Kerala</spam>, Pin – 695024
-</p>
-<p> <spam  className='thick'>Thrissur address:</spam><spam  className='thick'> Office A1, Deepa Apartment, venkitangu, Thrissur.
-Pincode : 680510 </spam></p>
-                        </div>
+</div>
+<div className="ad2">
+Building- 57, Kalpaka Nagar, Chackai,<spam  className='thick'> Trivandrum , Kerala</spam>, Pin : 695024
+</div>
+</div>
+<div className='allad2'> <div className="ad1">
+ <spam  className='thick'>Workshop :</spam></div><div className="ad2"><spam  className='thick'> Office A1, Deepa Apartment, venkitangu, Thrissur.
+Pin : 680510 </spam></div>
+</div>
+</div>
+
                     
                 </Col>
                 <Col sm={6} className= "text-center text-sm-end">

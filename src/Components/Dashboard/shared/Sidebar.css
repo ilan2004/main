@@ -1,0 +1,73 @@
+/* styles.css */
+
+/* Sidebar container */
+.sidebar-container {
+  background-color: #6FB3B8; /* Adjust background color as needed */
+    width: 15rem; /* Adjust width as needed */
+    padding: 0.75rem; /* Adjust padding as needed */
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    height: auto;
+
+ 
+  }
+  
+  /* Logo container */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Adjust gap as needed */
+    padding: 0.5rem 0; /* Adjust padding as needed */
+    color: #f9fafb; /* Adjust color as needed */
+  }
+  
+  /* Logo text */
+  .logo-text {
+    font-size: 1.25rem; /* Adjust font size as needed */
+  }
+  
+  /* Link container */
+  .link-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Adjust gap as needed */
+    padding-bottom: 50px;
+    
+
+  }
+  
+  /* Link */
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Adjust gap as needed */
+    padding: 0.5rem; /* Adjust padding as needed */
+    color: #d1d5db; /* Adjust color as needed */
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .link:hover,
+  .link.active {
+    background-color: #1f2937; /* Adjust hover and active background color as needed */
+    color: #f9fafb; /* Adjust hover and active color as needed */
+  }
+  
+  /* Logout container */
+  .logout-container {
+    padding: 0.5rem; /* Adjust padding as needed */
+  }
+  
+  /* Logout link */
+  .logout-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Adjust gap as needed */
+    color: #efab44; /* Adjust color as needed */
+    cursor: pointer;
+  }
+  .side-emblem{
+    height: 100px;
+    width: 140px;;
+  }
