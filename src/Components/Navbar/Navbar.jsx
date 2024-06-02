@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../../assets/img/dion.png';
 import Header from './Header';
@@ -98,14 +99,14 @@ const Navbars = () => {
               Contact Us
             </Nav.Link>
             </ScrollLink>
-            
-            <Link
+
+            <Nav.Link
             href={currentUser ? '/Dashboard' : '/Login'}
             onClick={handleClick}// Check if user is logged in
               className={activeLink === '#Login' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
               >
               Account
-            </Link>
+              </Nav.Link>
             
           </Nav>
           <span className='navbar-text'>
