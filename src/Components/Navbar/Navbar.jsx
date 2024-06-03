@@ -1,121 +1,68 @@
-// Navbar.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import './Navbar.css';
-import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../../assets/img/dion.png';
 import Header from './Header';
 import { useAuth } from '../../Contexts/AuthContext';
-const Navbars = () => {
+import './Navbar.css';
 
-  const [activeLink, setActiveLink] = useState(null);
+const Navbars = () => {
   const [scrollDirection, setScrollDirection] = useState(null);
-  const [scrolledBeyond100vh, setScrolledBeyond100vh] = useState(false);
   const { currentUser } = useAuth();
+
   useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      const prevScrollPos = handleScroll.prevScrollPos || currentScrollPos;
-
-      if (!scrolledBeyond100vh && currentScrollPos >= window.innerHeight) {
-        setScrolledBeyond100vh(true);
+      if (currentScrollPos > prevScrollPos) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
       }
-
-      if (scrolledBeyond100vh) {
-        if (currentScrollPos > prevScrollPos) {
-          setScrollDirection('down');
-        } else if (currentScrollPos < prevScrollPos) {
-          setScrollDirection('up');
-        }
-      }
-
-      handleScroll.prevScrollPos = currentScrollPos;
+      prevScrollPos = currentScrollPos;
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [scrolledBeyond100vh]);
+  }, []);
 
   const handleClick = (e) => {
-    e.preventDefault(); // Prevent the default link behavior
+    e.preventDefault();
     const url = currentUser ? '/Dashboard' : '/Login';
-    window.open(url, '_blank'); // Open the URL in a new tab
+    window.open(url, '_blank');
   };
-//smooth scroll
 
   return (
-    <Navbar className={scrollDirection === 'down' ? 'scrolling-down' : (scrollDirection === 'up' ? 'scrolling-up' : '')} >
+    <Navbar className={scrollDirection === 'down' ? 'scrolling-down' : (scrollDirection === 'up' ? 'scrolling-up' : '')}>
       <Container className='box'>
-        <label href='#home'>
-          <img className='emblem' src={logo} alt='' />
-        </label>
-        
+        <Navbar.Brand href='#home'>
+          <img className='emblem' src={logo} alt='Dion Power' />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav'>
+          <span className='navbar-toggler-icon'></span>
+        </Navbar.Toggle>
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
-            <ul className='alllinks'>
-          <li>
-            <NavLink
-              as={Link}
-              to ='/'
-              className={activeLink === '#Home' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
-            >
+            <Nav.Link as={NavLink} to='/' exact className='navbar-link'>
               Home
-            </NavLink>
-            </li>
-            <ScrollLink
-             to="Services" 
-            spy={true} 
-            smooth={true} 
-             offset={50} 
-             duration={800} 
-    >
-           <li> <NavLink
-              onClick={() => handleScrollTo('Services')}
-              href='#Services'
-              className={activeLink === 'Services' ? 'active navbar-link' : 'navbar-link'}
-              
-           >
+            </Nav.Link>
+            <Nav.Link as={ScrollLink} to='Services' spy={true} smooth={true} offset={-70} duration={800} className='navbar-link'>
               Services
-            </NavLink>
-            </li>
-            </ScrollLink>
-            <ScrollLink
-             to="connect" 
-            spy={true} 
-            smooth={true} 
-             offset={50} 
-             duration={800} 
-    >
-      <li>
-            <NavLink
-              onClick={() => handleScrollTo('#connect')}
-              className={activeLink === '#connect' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
-              href='#connect'
-            >
+            </Nav.Link>
+            <Nav.Link as={ScrollLink} to='connect' spy={true} smooth={true} offset={-70} duration={800} className='navbar-link'>
               Contact Us
-            </NavLink>
-            </li>
-            </ScrollLink>
-
-           <li> <NavLink
-            href={currentUser ? '/Dashboard' : '/Login'}
-            onClick={handleClick}// Check if user is logged in
-              className={activeLink === '#Login' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
-              >
+            </Nav.Link>
+            <Nav.Link as={Link} to={currentUser ? '/Dashboard' : '/Login'} onClick={handleClick} className='navbar-link'>
               Account
-              </NavLink>
-              </li>
-              </ul>
+            </Nav.Link>
           </Nav>
           <span className='navbar-text'>
             <button className='vvd'>
-              <a className='vvda' href='https://wa.me/918304963000'>
+              <a className='vvda' href='https://wa.me/917349344224'>
                 <span>Let's Connect</span>
               </a>
             </button>
@@ -125,6 +72,6 @@ const Navbars = () => {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default Navbars;
