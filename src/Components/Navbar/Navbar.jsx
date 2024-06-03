@@ -52,22 +52,22 @@ const Navbars = () => {
   return (
     <Navbar className={scrollDirection === 'down' ? 'scrolling-down' : (scrollDirection === 'up' ? 'scrolling-up' : '')} >
       <Container className='box'>
-        <Navbar.Brand href='#home'>
+        <label href='#home'>
           <img className='emblem' src={logo} alt='' />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic=navbar=nav'>
-          <span className='navbar-toggler-icon'></span>
-        </Navbar.Toggle>
+        </label>
+        
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
-
-            <Nav.Link
+            <ul className='alllinks'>
+          <li>
+            <NavLink
               as={Link}
               to ='/'
               className={activeLink === '#Home' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
             >
               Home
-            </Nav.Link>
+            </NavLink>
+            </li>
             <ScrollLink
              to="Services" 
             spy={true} 
@@ -75,14 +75,15 @@ const Navbars = () => {
              offset={50} 
              duration={800} 
     >
-            <Nav.Link
+           <li> <NavLink
               onClick={() => handleScrollTo('Services')}
               href='#Services'
               className={activeLink === 'Services' ? 'active navbar-link' : 'navbar-link'}
               
            >
               Services
-            </Nav.Link>
+            </NavLink>
+            </li>
             </ScrollLink>
             <ScrollLink
              to="connect" 
@@ -91,23 +92,26 @@ const Navbars = () => {
              offset={50} 
              duration={800} 
     >
-            <Nav.Link
+      <li>
+            <NavLink
               onClick={() => handleScrollTo('#connect')}
               className={activeLink === '#connect' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
               href='#connect'
             >
               Contact Us
-            </Nav.Link>
+            </NavLink>
+            </li>
             </ScrollLink>
 
-            <Nav.Link
+           <li> <NavLink
             href={currentUser ? '/Dashboard' : '/Login'}
             onClick={handleClick}// Check if user is logged in
               className={activeLink === '#Login' ? 'active navbar-link' : 'navbar-link'} // Update comparison value
               >
               Account
-              </Nav.Link>
-            
+              </NavLink>
+              </li>
+              </ul>
           </Nav>
           <span className='navbar-text'>
             <button className='vvd'>

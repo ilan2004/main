@@ -509,3 +509,7 @@ nav.navbar {
     text-decoration: none;
   
   }
+.alllinks{
+  display: flex;
+  gap:20px;
+}
