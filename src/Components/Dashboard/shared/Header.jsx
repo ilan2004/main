@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import './Header.css'; // Import the CSS file
 import classNames from 'classnames'; // No longer needed
 
-export default function Header() {
+export default function Header({ onSearch }) {
 	const { currentUser } = useAuth();
 	const navigate = useNavigate();
 

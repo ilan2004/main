@@ -5,14 +5,18 @@ import { format } from 'date-fns'
 import './RecentOrders.css';
 import { Link } from 'react-router-dom'
 import { getAuth } from 'firebase/auth';
+import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt } from 'react-icons/hi';
 import getOrderStatus from './lib/helpers'
 import { useAuth } from '../../Contexts/AuthContext';
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
+import Header from './shared/Header';
 
 
 export default function RecentOrders() {
 	const { currentUser } = useAuth();
 	const [recentOrderData, setRecentOrderData] = useState([]);
+	const [filteredData, setFilteredData] = useState([]);
+	const [searchQuery, setSearchQuery] = useState('');
 	const firestore = getFirestore();
   
 	useEffect(() => {
@@ -48,10 +52,31 @@ export default function RecentOrders() {
 		fetchUserData();
 	  }, [currentUser]);
 	
-	
+	  useEffect(() => {
+		if (searchQuery === '') {
+		  setFilteredData(recentOrderData);
+		} else {
+		  const filtered = recentOrderData.filter(order =>
+			order.chassisNumber && order.chassisNumber.toLowerCase().includes(searchQuery.toLowerCase())
+		  );
+		  setFilteredData(filtered);
+		}
+	  }, [searchQuery, recentOrderData]);
+	  
 
 	return (
+		
 		<div className="container-Order">
+			<div className="search-container relative">
+				{/* <HiOutlineSearch fontSize={20} className="icon2" /> */}
+				<input
+          type="text"
+          placeholder="Search by Chassis Number..."
+          className="search-input"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+		  />
+		</div>
             <strong className="header">Recent Orders</strong>
             <div className="border-x border-gray-200 rounded-sm mt-3">
                 <table className="table">
@@ -68,26 +93,19 @@ export default function RecentOrders() {
                         </tr>
                     </thead>
                     <tbody>
-                        {recentOrderData.map((order) => (
-                            <tr key={order.id} className="table-row">
-                                <td className="table-cell">
-                                    
-                                </td>
-                                <td className="table-cell">
-								{order.brand}
-                                </td>
-                                <td className="table-cell">
-								{order.VehicleModel}
-                                </td>
-                                {/* <td className="table-cell">{format(new Date(order.order_date), 'dd MMM yyyy')}</td> */}
-                                <td className="table-cell">{order.chassisNumber}</td>
-                                <td className="table-cell">{order.servicenumber}</td>
-								<td className="table-cell">{order.BatteryVoltage}</td>
-								<td className="table-cell">{order.BatteryCurrent}</td>
-                                <td className="table-cell">{getOrderStatus(order.Status)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
+            {filteredData.map((order) => (
+              <tr key={order.id} className="table-row">
+                <td className="table-cell">{order.id}</td>
+                <td className="table-cell">{order.brand}</td>
+                <td className="table-cell">{order.VehicleModel}</td>
+                <td className="table-cell">{order.chassisNumber}</td>
+                <td className="table-cell">{order.registrationNumber}</td>
+                <td className="table-cell">{order.BatteryVoltage}</td>
+				<td className="table-cell">{order.BatteryCurrent}</td>
+                <td className="table-cell">{getOrderStatus(order.Status)}</td>
+              </tr>
+            ))}
+          </tbody>
                 </table>
             </div>
         </div>
