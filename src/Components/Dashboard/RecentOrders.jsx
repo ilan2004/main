@@ -99,7 +99,7 @@ export default function RecentOrders() {
                 <td className="table-cell">{order.brand}</td>
                 <td className="table-cell">{order.VehicleModel}</td>
                 <td className="table-cell">{order.chassisNumber}</td>
-                <td className="table-cell">{order.registrationNumber}</td>
+                <td className="table-cell">{order.servicenumber}</td>
                 <td className="table-cell">{order.BatteryVoltage}</td>
 				<td className="table-cell">{order.BatteryCurrent}</td>
                 <td className="table-cell">{getOrderStatus(order.Status)}</td>
