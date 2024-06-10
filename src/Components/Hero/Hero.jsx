@@ -1,59 +1,37 @@
-import React from 'react'
-import Car from './../../assets/img/Electric car.svg';
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import './Hero.css';
-import { motion } from 'framer-motion';
-import Blob from './../../assets/img/blob.svg';
-import { ChevronRight } from 'lucide-react';
-import UseMousePosition from '../Utilitis/useMousePosition';
-import Ripple from '../Ripple/Ripple';
-import AnimatedGradientText from './Extras/Extra';
+import React, { useRef } from "react";
+import { useScroll, useTransform } from "framer-motion";
+import GoogleGeminiEffect from "../Gemini/Gemini";
 
- const Hero = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-    const { mousePosition, cursorVariant, variants, textEnter, textLeave }= UseMousePosition();
-    const cn = (...classNames) => classNames.filter(Boolean).join(' ');
-
-// Usage example
-const Button = ({ primary, danger }) => {
-  const classNames = cn("button", {
-    "button-primary": primary,
-    "button-danger": danger,
+export function Hero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
   });
 
-  return <button className={classNames}>Click me</button>;
-};
-  return (
-    
-    <div id='Home' className='Hero' ref={ref}
-    >
-      <Ripple/>
-        <div className="Head" style={{
-        opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.8s"
-      }}>
-        
-            <div className="p1">
-            <span  className='solutions'> Revolutionize your ride </span>
-            <h1  className='h11' > 
-            Dion <spam className='powered'>power</spam> solutions
-             
-            </h1>
-            <p className='p11' >
-            One stop solution for all your lithium batteries 
-            </p >
-     <p class="etrad" >Extended warranty for Electric Vehicles Battery Provided </p>
+  const pathLengthFirst = useTransform(scrollYProgress, [0, 0.8], [0.2, 1.2]);
+  const pathLengthSecond = useTransform(scrollYProgress, [0, 0.8], [0.15, 1.2]);
+  const pathLengthThird = useTransform(scrollYProgress, [0, 0.8], [0.1, 1.2]);
+  const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
+  const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
 
-            </div>
-            
-        </div>
-       
-            
+  return (
+  
+    <div
+      className="h-[400vh] bg-black w-full dark:border dark:border-white-[0.1] rounded-md relative  overflow-clip"
+      ref={ref}
+    >
+      <GoogleGeminiEffect
+        pathLengths={[
+          pathLengthFirst,
+          pathLengthSecond,
+          pathLengthThird,
+          pathLengthFourth,
+          pathLengthFifth,
+        ]}
+      />
     </div>
-    
-  )
+
+  );
 }
 export default Hero;
-

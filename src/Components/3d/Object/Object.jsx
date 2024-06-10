@@ -54,17 +54,16 @@ return (
     onCreated={({ gl }) => {
   
     }}>
-    <Suspense fallback={<Loader/>}>
-      <directionalLight position={[5, 1, 10]} intensity={2} color="#BADFE7" />
-      <ambientLight intensity={1} color="#3BD3E2" />
-      <spotLight intensity={26} color="#3BD3E2" position={[5, 1, 10]} angle={Math.PI / 4} penumbra={0.05} />
-      <hemisphereLight skycolor="#b1e1ff" intensity={0.5} groundColor="#ff8c00" />
-      {/* <PerspectiveCamera ref={cameraRef} makeDefault /> */}
-      <pointLight intensity={700} color="#3BD3E2" position={[-5, 1, -10]} distance={20} />
-  
+    <Suspense fallback={<Loader />}>
+      {/* Lighting */}
+      <directionalLight position={[5, 1, 10]} intensity={2} color="#FFFFFF" />
+      <ambientLight intensity={1} color="#FFFFFF" />
+      <spotLight intensity={26} color="#FFFFFF" position={[5, 1, 10]} angle={Math.PI / 4} penumbra={0.05} />
+      <hemisphereLight skyColor="#FFFFFF" intensity={0.5} groundColor="#FFFFFF" />
+      <pointLight intensity={700} color="#FFFFFF" position={[-5, 1, -10]} distance={20} />
 
-        <Model/>
-
+      {/* Model */}
+      <Model />
     </Suspense>
   </Canvas>
   

@@ -1,7 +1,7 @@
 .Warranty{
     display: flex;
     flex-direction: row;
-    background:#1F9CA8;
+    background:black;
     height: 100vh;
     align-items: center;
     justify-content: space-around;

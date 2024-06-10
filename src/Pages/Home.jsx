@@ -8,13 +8,13 @@ import Wave from '../assets/img/wave.svg';
 import { useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 import Ripple from '../Components/Ripple/Ripple';
-import Navbars from '../Components/Navbar/Navbar';
+import NavbarV from '../Components/NavbarV2/NavbarV2';
 const Home = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
   return (
     <div>
-    <Navbars/>
+    <NavbarV/>
        
         <Hero path="Home"/>
 

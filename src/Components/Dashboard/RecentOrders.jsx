@@ -95,7 +95,7 @@ export default function RecentOrders() {
                     <tbody>
             {filteredData.map((order) => (
               <tr key={order.id} className="table-row">
-                <td className="table-cell">{order.id}</td>
+                <td className="table-cell"></td>
                 <td className="table-cell">{order.brand}</td>
                 <td className="table-cell">{order.VehicleModel}</td>
                 <td className="table-cell">{order.chassisNumber}</td>

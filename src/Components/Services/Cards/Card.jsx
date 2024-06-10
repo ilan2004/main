@@ -16,9 +16,12 @@ const Card = ({i, title,font, description, src, url,detail, color, progress, ran
  
   return (
     <div ref={container} className='cardContainer'>
-      <motion.div 
-        style={{background: color,color: font, scale, top:`calc(-5vh + ${i * 25}px)`}} 
-        className='card'
+      <motion.div
+        style={{
+          background: `linear-gradient(to bottom, ${color}, #9cbc59)`,
+          color: font,
+          scale, top:`calc(-5vh + ${i * 25}px)`}}
+          className='card'
       >
         <h2>{title}</h2>
         <div className='body'>

@@ -14,7 +14,7 @@
 }
 .App{
   scroll-behavior: smooth;
-  
+  background-color: black;
 }
 @tailwind base;
 @tailwind components;
