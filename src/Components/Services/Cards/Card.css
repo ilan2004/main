@@ -115,6 +115,11 @@
               transform-origin: top;
               height: 90vh;
               width: 100vw;
+              h2 {
+                text-align: center;
+                margin: 0px;
+                font-size: 2rem;
+              }
            
           }
             .description{
