@@ -1,6 +1,7 @@
 .contact {
-  background: #F6F6F2;
+  background: #000000;
     padding: 60px 0 200px 0;
+    color: #fff;
  
   }
   .contact img {
@@ -60,7 +61,7 @@
     width: 0%;
     height: 100%;
     position: absolute;
-    background-color: #098B98;
+    background-color: #0599aa;
     left: 0;
     top: 0;
     z-index: -1;

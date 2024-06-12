@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { useRef } from 'react';
-import './Login.scss'
+import './Login1.css';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../Contexts/AuthContext';
-function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+const LoginBox = () => {
+    const [signIn, toggle] = React.useState(true);
     const {signup , currentUser} = useAuth()
     const navigate = useNavigate();
     const { login } = useAuth()
     const emailRef = useRef()
     const logemailRef = useRef()
     const nameRef = useRef()
+    const LocationRef = useRef()
     const passwordRef = useRef()
     const logpasswordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -21,12 +22,13 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const name = nameRef.current.value;
+        const displayName = nameRef.current.value;
+        const Location = LocationRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const passwordConfirm = passwordConfirmRef.current.value;
 
-        if (!name || !email || !password || !passwordConfirm) {
+        if (!displayName || !email || !password || !Location || !passwordConfirm) {
             enqueueSnackbar('Please fill in all details.', { variant: 'error' });
             return;
         }
@@ -36,18 +38,22 @@ function Login() {
             return;
         }
 
-        try {
-            setError("");
-            setLoading(true);
-            await signup(email, password);
-            enqueueSnackbar('Account created successfully!', { variant: 'success' }); // Snackbar for successful account creation
-            form.current.reset();
+        setError("");
+        setLoading(true);
+        signup(email, password, displayName, Location)
+          .then(() => {
+            enqueueSnackbar('Account created successfully!', { variant: 'success' });
+            console.log("Account created successfully");
             setTimeout(() => {
-                 navigate("/Form");
-             }, 1000);
-        } catch {
+              navigate("/Form");
+            }, 1000);
+          })
+          .catch((error) => {
+            console.error("Error creating account:", error);
             setError("Failed to create an account");
-        }
+            setLoading(false);
+          });
+        
 
         setLoading(false);
     }
@@ -76,40 +82,25 @@ function Login() {
 
         setLoading(false);
     }
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-  };
-
   return (
-    <div className="login-mobile">
-    <div className="form-body">
-    <div className="form-structor">
-      <form onSubmit={handleSubmit} className={isLogin ? "signup slide-up" : "signup"}>
- 
-        <h2 className="form-title" onClick={toggleForm}><span>or</span>SIGN UP </h2>
-        <div className="form-holder">
-          <input ref={nameRef} type="text" className="input" placeholder="Name" />
-          <input ref={emailRef} type="email" className="input" placeholder="Email" />
-          <input ref={passwordRef} type="password" className="input" placeholder="Password" />
-          <input ref={passwordConfirmRef} type="password" className="input" placeholder="confirm-Password" />
+    <div className="loginpage">
+    <div className="login-box"signinIn={signIn}>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmitlogin}>
+        <div className="user-box">
+          <input ref={logemailRef} type='email' required />
+          <label>Email</label>
         </div>
-        <button disabled={loading} className="submit-btn">Sign up</button>
-      </form>
-      <form onSubmit={handleSubmitlogin} className={isLogin ? "login" : "login slide-up"}>
-
-        <div className="center">
-          <h2 className="form-title" onClick={toggleForm}><span>or</span>Log in</h2>
-          <div className="form-holder">
-            <input ref={logemailRef} type="email" className="input" placeholder="Email" />
-            <input ref={logpasswordRef} type="password" className="input" placeholder="Password" />
-          </div>
-          <button disabled={loading} className="submit-btn">Log in</button>
+        <div className="user-box">
+          <input ref={logpasswordRef} type="password" required />
+          <label>Password</label>
         </div>
+        <button  disabled={loading}>Login</button>
       </form>
     </div>
     </div>
-    </div>
+    
   );
-}
+};
 
-export default Login;
+export default LoginBox;

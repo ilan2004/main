@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useState } from 'react'
-import Contactimg from '../../assets/img/email.svg';
+import Contactimg from '../../assets/img/email.png';
 import {Container,Row, Col} from 'react-bootstrap';
 import { useInView } from "framer-motion";
 import { SnackbarProvider, useSnackbar } from 'notistack';

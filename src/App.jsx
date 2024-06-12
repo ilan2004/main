@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard";
 import Footer from "./Components/Footer/Footer";
 import { NextUIProvider } from "@nextui-org/react";
 import { AuthProvider } from "./Contexts/AuthContext";
+import LoginBox from "./Components/Login/Login1";
 
 export default function App() {
   const ref = useRef(null);
@@ -26,7 +27,7 @@ export default function App() {
             <div className="app">
               <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Connect />} />
+                <Route path='/login' element={<LoginBox />} />
                 <Route path="/dashboard" element={<PrivateRoute><Layout /></PrivateRoute>}>
                   <Route index element={<Dashboard />} />
                 </Route>
@@ -34,7 +35,7 @@ export default function App() {
                   <Route index element={<Form />} />
                 </Route>
               </Routes>
-              <Footer />
+
             </div>
           </ReactLenis>
         </div>

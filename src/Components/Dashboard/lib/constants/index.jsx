@@ -22,12 +22,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/Form',
 		icon: <HiOutlineCube />
 	},
-	{
-		key: 'orders',
-		label: 'Orders',
-		path: '/orders',
-		icon: <HiOutlineShoppingCart />
-	},
+	// {
+	// 	key: 'orders',
+	// 	label: 'Orders',
+	// 	path: '/orders',
+	// 	icon: <HiOutlineShoppingCart />
+	// },
 
 ]
 

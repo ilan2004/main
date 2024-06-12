@@ -3,7 +3,7 @@
 /* Layout container */
 .layout-container {
     background-color: #f3f4f6; /* Adjust background color as needed */
-    /* height: 100vh; */
+    height: 100vh;
     width: 100vw;
     overflow: hidden;
     display: flex;

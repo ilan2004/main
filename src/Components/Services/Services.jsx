@@ -4,7 +4,7 @@ import Card from './Cards/Card';
 import { useScroll } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import Car from '../../assets/img/Car.mp4';
-import { Element} from 'react-scroll';
+
 
 export default function Services() {
   const container = useRef(null);

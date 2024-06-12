@@ -9,6 +9,7 @@ import { useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 import Ripple from '../Components/Ripple/Ripple';
 import NavbarV from '../Components/NavbarV2/NavbarV2';
+import Footer from '../Components/Footer/Footer';
 const Home = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -22,6 +23,7 @@ const Home = () => {
             <Services path="Services" />
             <Warranty/>
             <Contact path="Contact" />
+            <Footer/>
     </div>
   )
 }

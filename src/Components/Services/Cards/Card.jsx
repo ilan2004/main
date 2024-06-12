@@ -16,6 +16,7 @@ const Card = ({i, title,font, description, src, url,detail, color, progress, ran
  
   return (
     <div ref={container} className='cardContainer'>
+      <div ref={container} className='cardContainer-inside'>
       <motion.div
         style={{
           background: `linear-gradient(to bottom, ${color}, #9cbc59)`,
@@ -48,6 +49,7 @@ const Card = ({i, title,font, description, src, url,detail, color, progress, ran
 
         </div>
       </motion.div>
+      </div>
     </div>
   )
 }
