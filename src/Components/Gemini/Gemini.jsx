@@ -1,6 +1,7 @@
 import { cn } from "../../Utilities/cn";
 import { motion } from "framer-motion";
 import React from "react";
+import './Gemini.css'
 
 const transition = {
   duration: 1,
@@ -18,7 +19,7 @@ const GoogleGeminiEffect = ({
       
       <div className={cn("sticky top-80", className)}>
       <p
-  className="text-xs md:text-xl font-normal text-center text-neutral-400 mt-4 max-w-lg mx-auto"
+  className="description-text"
   style={{
     background: 'linear-gradient(to right, green, orange)',
     WebkitBackgroundClip: 'text',
@@ -29,7 +30,7 @@ const GoogleGeminiEffect = ({
     `Battery Extended Warranty Services!`}
 </p>
       <p
-    className="text-lg md:text-7xl font-normal pb-4 text-center bg-clip-text text-transparent"
+    className="title-text"
     style={{
       background: 'linear-gradient(to bottom, #9cbc59, #3CB371)',
       WebkitBackgroundClip: 'text',
@@ -41,7 +42,7 @@ const GoogleGeminiEffect = ({
 </div>
 
       <p
-  className="text-xs md:text-xl font-normal text-center text-neutral-400 mt-4 max-w-lg mx-auto"
+  className="description-text"
   style={{
     background: 'linear-gradient(to right, green, orange)',
     WebkitBackgroundClip: 'text',
