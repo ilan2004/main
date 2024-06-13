@@ -46,7 +46,7 @@ const ContactWithSnackbar = () => {
       <section className='contact' id='connect'>
         <Container>
           <Row className='align-items-center'>
-            <Col md={6}>
+            <Col md={4}>
               <img  src={Contactimg} alt="Contact US"/>
             </Col>
             <Col md={6}>
