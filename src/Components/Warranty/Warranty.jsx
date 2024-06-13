@@ -4,6 +4,7 @@ import War from '../../assets/img/war1.png'
 const Warranty = () => {
   return (
     <div className='Warranty'>
+      <div className="warranty-box">
 <div className="text">
     <h1 className='exse'>
     Battery Warranty Extension Service
@@ -16,7 +17,7 @@ const Warranty = () => {
 <div className="extent">
     <img className='year' src={War} alt="Warranty"/>
 </div>
-
+</div>
     </div>
   )
 }

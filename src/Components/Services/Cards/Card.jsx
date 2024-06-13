@@ -19,7 +19,7 @@ const Card = ({i, title,font, description, src, url,detail, color, progress, ran
       <div ref={container} className='cardContainer-inside'>
       <motion.div
         style={{
-          background: `linear-gradient(to bottom, ${color}, #9cbc59)`,
+          background: `linear-gradient(to bottom, ${color}, #000000)`,
           color: font,
           scale, top:`calc(-5vh + ${i * 25}px)`}}
           className='card'
