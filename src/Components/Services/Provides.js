@@ -24,14 +24,14 @@ let all_items =
     },
     {
         title: "Lithium-ion battery packs for an electric two-wheeler",
-         description:'The growing awareness of greenhouse gas emissions and pollution has led to the growth of electric two-wheeler segment. HertzEv has found opportunity in this growth and provides reliable and affordable lithium-ion battery packs with superior efficiency. HertzEv battery packs provide safe and consistent lithium-ion battery power for electric scooters and high-performance lithium-ion battery pack with in-house designed intelligent BMS protection.',
+         description:'The growing awareness of greenhouse gas emissions and pollution has led to the growth of electric two-wheeler segment. DIONPOWER has found opportunity in this growth and provides reliable and affordable lithium-ion battery packs with superior efficiency. DIONPOWER battery packs provide safe and consistent lithium-ion battery power for electric scooters and high-performance lithium-ion battery pack with in-house designed intelligent BMS protection.',
         src: Battery2,
         color: "#3CB371",
         font:"#F6F6F2",
     },
     {
         title: 'Lithium-ion battery packs for Electric car',
-        description:'Skyrocketing fuel costs and climate change concerns have amplified the demand for sustainable transportation. Hybrid and electric vehicles offer a cost-effective and eco-conscious solution, improving fuel efficiency and reducing carbon emissions. HertzEv specializes in customizable lithium-ion battery solutions for electric four-wheelers, tailored for Indian road and temperature conditions with safety features and compact design.        ',
+        description:'Skyrocketing fuel costs and climate change concerns have amplified the demand for sustainable transportation. Hybrid and electric vehicles offer a cost-effective and eco-conscious solution, improving fuel efficiency and reducing carbon emissions. DIONPOWER specializes in customizable lithium-ion battery solutions for electric four-wheelers, tailored for Indian road and temperature conditions with safety features and compact design.        ',
         src: Battery3,
         color: "#3CB371",
         font:"#F6F6F2"
