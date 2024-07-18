@@ -13,6 +13,8 @@ export default function Sidebar() {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const phoneNumber = "+918304963000";
+    const emailAddress = "info@dionpower.in";
   const handleSignOut = async () => {
     try {
         setError("");

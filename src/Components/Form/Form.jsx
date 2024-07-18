@@ -7,17 +7,16 @@ import { addDoc, collection } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 
-const SnackForm = ({ userId }) =>{
+const SnackForm = ({ userId }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
-
     brand: '',
     VehicleModel: '',
-    chassisNumber: '', // Updated input name
-    servicenumber: '', // Updated input name
-    BatteryVoltage: '', // Updated input name
-    BatteryCurrent: '', // Updated input name
+    chassisNumber: '', 
+    servicenumber: '', 
+    BatteryVoltage: '', 
+    BatteryCurrent: '', 
     contactMobile: '',
     Repair: '',
     comment: ''
@@ -30,11 +29,17 @@ const SnackForm = ({ userId }) =>{
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Store the form data
-    setSubmittedData(formData);
+    const now = new Date();
+    const date = now.toLocaleDateString();
+    const time = now.toLocaleTimeString();
+    // Store the form data along with the current date and time
+    setSubmittedData({
+      ...formData,
+      date,
+      time
+    });
     // Reset the form
     setFormData({
-
       brand: '',
       VehicleModel: '',
       chassisNumber: '',
@@ -61,17 +66,7 @@ const SnackForm = ({ userId }) =>{
 
       // Prepare data for submission
       const formData = {
-
-        brand: submittedData.brand,
-        VehicleModel: submittedData.VehicleModel,
-        chassisNumber: submittedData.chassisNumber,
-        servicenumber: submittedData.servicenumber,
-        BatteryVoltage: submittedData.BatteryVoltage,
-        BatteryCurrent: submittedData.BatteryCurrent,
-        contactMobile: submittedData.contactMobile,
-        Repair: submittedData.Repair,
-        comment: submittedData.comment,
-        // Include the user's UID in the form data
+        ...submittedData,
         userId: user.uid
       };
 
@@ -83,15 +78,7 @@ const SnackForm = ({ userId }) =>{
 
       // Prepare data for email submission
       const templateParams = {
-        brand: formData.brand,
-        VehicleModel: formData.VehicleModel,
-        chassisNumber: formData.chassisNumber,
-        servicenumber: formData.servicenumber,
-        BatteryVoltage: formData.BatteryVoltage,
-        BatteryCurrent: formData.BatteryCurrent,
-        contactMobile: formData.contactMobile,
-        Repair: formData.Repair,
-        comment: formData.comment,
+        ...formData,
         userEmail: currentUser.email // Use the current user's email address as the recipient
       };
 
@@ -100,12 +87,15 @@ const SnackForm = ({ userId }) =>{
         publicKey: 'Qbcmn6dU4S2rOSw6O',
       });
 
+      enqueueSnackbar('Submitted successfully!', { variant: 'success' });
+
       // Reset form submission state
       setIsSubmitting(false);
 
       // Optionally, you can add a success message or redirect the user
     } catch (error) {
       console.error("Error submitting form data:", error);
+      enqueueSnackbar('Error submitting form data. Please try again.', { variant: 'error' });
       // Handle error, display error message, etc.
       setIsSubmitting(false);
     }
@@ -153,174 +143,179 @@ const SnackForm = ({ userId }) =>{
   };
   return (
     <SnackbarProvider>
-    <div className="alldetails">
-      <div className="repairbut">
-      <button className="Repair" >SERVICE/REPAIR</button>
-      <button className="Repair" onClick={toggleAdditionalFields}>Extended Warranty</button>
+      <div className="alldetails">
+        <div className="repairbut">
+          <button className="Repair" >SERVICE/REPAIR</button>
+          <button className="Repair" onClick={toggleAdditionalFields}>Extended Warranty</button>
+        </div>
+        <form className='form-fill' onSubmit={handleSubmit}>
+          <input
+            name="brand"
+            type="text"
+            className="feedback-input"
+            placeholder="Vehicle Brand"
+            value={formData.brand}
+            onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+          />
+          <input
+            name="VehicleModel"
+            type="text"
+            className="feedback-input"
+            placeholder="Vehicle Model"
+            value={formData.VehicleModel}
+            onChange={(e) => setFormData({ ...formData, VehicleModel: e.target.value })}
+          />
+          <input
+            name="chassisNumber"
+            type="text"
+            className="feedback-input"
+            placeholder="Chassis Number/ Motor Number:"
+            value={formData.chassisNumber}
+            onChange={(e) => setFormData({ ...formData, chassisNumber: e.target.value })}
+          />
+          <input
+            name="servicenumber"
+            type="number"
+            className="feedback-input"
+            placeholder="Battery Service Number: "
+            value={formData.registrationNumber}
+            onChange={(e) => setFormData({ ...formData, servicenumber: e.target.value })}
+          />
+          <input
+            name="BatteryVoltage"
+            type="number"
+            className="feedback-input"
+            placeholder="Battery Voltage"
+            value={formData.BatteryVoltage}
+            onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
+          />
+          <input
+            name="BatteryCurrent"
+            type="number"
+            className="feedback-input"
+            placeholder="Battery Current"
+            value={formData.BatteryCurrent}
+            onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
+          />
+          <input
+            name="contactMobile"
+            type="number"
+            className="feedback-input"
+            placeholder="Contact Mobile"
+            value={formData.contactMobile}
+            onChange={(e) => setFormData({ ...formData, contactMobile: e.target.value })}
+          />
+          {showAdditionalFields && (
+            <>
+              <input
+                name="VehiclekiloMeters"
+                type="text"
+                className="feedback-input"
+                placeholder="Vehicle kiloMeters"
+                value={formData.VehiclekiloMeters}
+                onChange={(e) => setFormData({ ...formData, VehiclekiloMeters: e.target.value })}
+              />
+              <input
+                name="Battery Voltage "
+                type="text"
+                className="feedback-input"
+                placeholder="BatteryVoltage"
+                value={formData.BatteryVoltage}
+                onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
+              />
+              <input
+                name="BatteryCurrent"
+                type="text"
+                className="feedback-input"
+                placeholder="Additional Field 2"
+                value={formData.BatteryCurrent}
+                onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
+              />
+            </>
+          )}
+          <textarea
+            name="comment"
+            className="feedback-input"
+            placeholder="Comment"
+            value={formData.comment}
+            onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
+          ></textarea>
+          <input type="submit" value="SUBMIT" />
+        </form>
+        <div className="for-table">
+          {/* Render table if form is submitted */}
+          {submittedData && (
+            <table>
+              <tbody>
+                <tr>
+                  <th>Field</th>
+                  <th>Value</th>
+                </tr>
+                <tr>
+                  <td className='left-side'>Vehicle Brand</td>
+                  <td className='Right-side'>{submittedData.brand}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Vehicle Model</td>
+                  <td className='Right-side'>{submittedData.VehicleModel}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Chassis Number/ Motor Number:</td>
+                  <td className='Right-side'>{submittedData.chassisNumber}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Battery Service Number</td>
+                  <td className='Right-side'>{submittedData.servicenumber}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Battery Voltage</td>
+                  <td className='Right-side'>{submittedData.BatteryVoltage}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Battery Current</td>
+                  <td className='Right-side'>{submittedData.BatteryCurrent}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Contact Mobile</td>
+                  <td className='Right-side'>{submittedData.contactMobile}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Comment</td>
+                  <td className='Right-side'>{submittedData.comment}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Submission Date</td>
+                  <td className='Right-side'>{submittedData.date}</td>
+                </tr>
+                <tr>
+                  <td className='left-side'>Submission Time</td>
+                  <td className='Right-side'>{submittedData.time}</td>
+                </tr>
+                <div className="button-div">
+                  <button className="table-submit" onClick={handleFormSubmit} disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
+                <div className="years">
+                  <button className="two" onClick={() => handleYearClick('2 Years')}>
+                    2 Years E.Warranty
+                  </button>
+                  <button className="fiveyear" onClick={() => handleYearClick('5 Years')}>
+                    5 Years E.Warranty
+                  </button>
+                </div>
+                <div className="costof">
+                  <h3>Cost of --{year}-- Warranty will be ------</h3>
+                </div>
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
-      <form className='form-fill' onSubmit={handleSubmit}>
-        <input
-          name="brand"
-          type="text"
-          className="feedback-input"
-          placeholder="Vehicle Brand"
-          value={formData.brand}
-          onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
-        />
-        <input
-          name="VehicleModel"
-          type="text"
-          className="feedback-input"
-          placeholder="Vehicle Model"
-          value={formData.VehicleModel}
-          onChange={(e) => setFormData({ ...formData, VehicleModel: e.target.value })}
-        />
-        <input
-          name="chassisNumber"
-          type="text"
-          className="feedback-input"
-          placeholder="Chassis Number/ Motor Number:"
-          value={formData.chassisNumber}
-          onChange={(e) => setFormData({ ...formData, chassisNumber: e.target.value })}
-        />
-        <input
-          name="servicenumber"
-          type="number"
-          className="feedback-input"
-          placeholder="Battery Service Number: "
-          value={formData.registrationNumber}
-          onChange={(e) => setFormData({ ...formData, servicenumber: e.target.value })}
-        />
-        <input
-          name="BatteryVoltage"
-          type="number"
-          className="feedback-input"
-          placeholder="Battery Voltage"
-          value={formData.BatteryVoltage}
-          onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
-        />
-        <input
-          name="BatteryCurrent"
-          type="number"
-          className="feedback-input"
-          placeholder="Battery Current"
-          value={formData.BatteryCurrent}
-          onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
-        />
-        <input
-          name="contactMobile"
-          type="number"
-          className="feedback-input"
-          placeholder="Contact Mobile"
-          value={formData.contactMobile}
-          onChange={(e) => setFormData({ ...formData, contactMobile: e.target.value })}
-        />
-        {showAdditionalFields && (
-          <>
-            <input
-              name="VehiclekiloMeters"
-              type="text"
-              className="feedback-input"
-              placeholder="Vehicle kiloMeters"
-              value={formData.VehiclekiloMeters}
-              onChange={(e) => setFormData({ ...formData, VehiclekiloMeters: e.target.value })}
-            />
-            <input
-              name="Battery Voltage "
-              type="text"
-              className="feedback-input"
-              placeholder="BatteryVoltage"
-              value={formData.BatteryVoltage}
-              onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
-            />
-            <input
-              name="BatteryCurrent"
-              type="text"
-              className="feedback-input"
-              placeholder="Additional Field 2"
-              value={formData.BatteryCurrent}
-              onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
-            />
-          </>
-        )}
-
-        <textarea
-          name="comment"
-          className="feedback-input"
-          placeholder="Comment"
-          value={formData.comment}
-          onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-        ></textarea>
-        <input  type="submit" value="SUBMIT" />
-      </form>
-      <div className="for-table">
-        {/* Render table if form is submitted */}
-        {submittedData && (
-          <table>
-            <tbody>
-              <tr>
-                <th>Field</th>
-                <th>Value</th>
-              </tr>
-              <tr>
-                <td className='left-side'>Vehicle Brand</td>
-                <td className='Right-side'>{submittedData.brand}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>Vehicle Model</td>
-                <td className='Right-side'>{submittedData.VehicleModel}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>Chassis Number/ Motor Number:</td>
-                <td className='Right-side'>{submittedData.chassisNumber}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>Battery Service Number:</td>
-                <td className='Right-side'>{submittedData.servicenumber}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>Battery Voltage</td>
-                <td className='Right-side'>{submittedData.BatteryVoltage}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>Battery Current</td>
-                <td className='Right-side'>{submittedData.BatteryCurrent}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>contact Mobile</td>
-                <td className='Right-side'>{submittedData.contactMobile}</td>
-              </tr>
-              <tr>
-                <td className='left-side'>Comment</td>
-                <td className='Right-side'>{submittedData.comment}</td>
-              </tr>
-              <div className="button-div">
-        <button className="table-submit" onClick={handleFormSubmit} disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
-      </div>
-      <div className="years">
-        <button className="two" onClick={() => handleYearClick('2 Years')}>
-          2 Years E.Warranty
-        </button>
-        <button className="fiveyear" onClick={() => handleYearClick('5 Years')}>
-          5 Years E.Warranty
-        </button>
-      </div>
-      <div className="costof">
-        <h3>Cost of --{year}-- Warranty will be ------</h3>
-      </div>
-            </tbody>
-          </table>
-          
-        )}
-      </div>
-      
-      
-    </div>
     </SnackbarProvider>
   );
 }
+
 const Form = () => {
   return (
     <SnackbarProvider>

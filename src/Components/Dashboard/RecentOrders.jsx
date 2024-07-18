@@ -71,6 +71,8 @@ export default function RecentOrders({ setOrderCount }) {
               <th className="table-cell">Battery Voltage</th>
               <th className="table-cell">Battery Current</th>
               <th className="table-cell">Order Status</th>
+              <th className="table-cell">Submission Date</th>
+              <th className="table-cell">Submission Time</th>
             </tr>
           </thead>
           <tbody>
@@ -84,6 +86,8 @@ export default function RecentOrders({ setOrderCount }) {
                 <td className="table-cell">{order.BatteryVoltage}</td>
                 <td className="table-cell">{order.BatteryCurrent}</td>
                 <td className="table-cell">{getOrderStatus(order.Status)}</td>
+                <td className="table-cell">{order.date}</td>
+                <td className="table-cell">{order.time}</td>
               </tr>
             ))}
           </tbody>
@@ -92,3 +96,4 @@ export default function RecentOrders({ setOrderCount }) {
     </div>
   );
 }
+

@@ -14,7 +14,12 @@ module.exports = withMT({
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '250vh': '250vh',
+      },
+    },
+
   },
   darkMode: "class",
   plugins: [nextui()],
