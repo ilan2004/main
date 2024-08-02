@@ -55,7 +55,16 @@ Pin : 680510 </spam></div>
 
                     
                 </Col>
-                <Col sm={6} className= "text-center text-sm-end">
+                <Col sm={6} className= "text-center items-center justify-center text-sm-end">
+                <div className='map-box'>
+                    <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.3818307303235!2d76.090987!3d10.5203517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ed77b014b7d1%3A0x594202c455434ca3!2sDion%20Power%20Solutions%20LLP!5e0!3m2!1sen!2sin!4v1690979022343!5m2!1sen!2sin"
+                    className='map'
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                    </div>
                     <div className='social-icon'>
                     <a href=''><img src={navIcon1}/></a>
                     <a href='https://www.facebook.com/profile.php?id=61559168102771'><img src={navIcon2}/></a>

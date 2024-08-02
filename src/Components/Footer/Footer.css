@@ -122,3 +122,21 @@ margin-left: 18px;
   background-color: transparent;
   transition: 0.3s ease-in-out;
 }
+
+.map {
+  border: 0;
+  width: 100%;
+
+  height: 250px;    /* Smaller height */
+}
+
+@media (max-width: 768px) {
+  .map {
+    max-width: 95%;
+    height: 200px;  /* Adjust height for smaller screens */
+  }
+}
+.map-box{
+  align-items:  center !important;
+  justify-content: center !important;
+}
