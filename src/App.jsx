@@ -12,6 +12,9 @@ import Footer from "./Components/Footer/Footer";
 import { NextUIProvider } from "@nextui-org/react";
 import { AuthProvider } from "./Contexts/AuthContext";
 import LoginBox from "./Components/Login/Login1";
+import ManageDashboard from "./Pages/Manager/MangeDashboard";
+import SignupBox from "./Components/Signup/Signup";
+import ManagerLayout from "./Components/ManagerDash/shared/Layout";
 
 export default function App() {
   const ref = useRef(null);
@@ -28,8 +31,12 @@ export default function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<LoginBox />} />
+                <Route path='/Newaccount' element={<SignupBox />} />
                 <Route path="/dashboard" element={<PrivateRoute><Layout /></PrivateRoute>}>
                   <Route index element={<Dashboard />} />
+                </Route>
+                <Route path="/ManagerDashboard" element={<PrivateRoute><ManagerLayout /></PrivateRoute>}>
+                  <Route index element={<ManageDashboard />} />
                 </Route>
                 <Route path="/form" element={<PrivateRoute><Layout /></PrivateRoute>}>
                   <Route index element={<Form />} />

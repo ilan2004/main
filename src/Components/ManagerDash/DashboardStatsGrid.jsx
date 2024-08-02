@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { IoCart } from 'react-icons/io5';
 import { useAuth } from '../../Contexts/AuthContext';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+
 function BoxWrapper({ children }) {
   return <div className="bg-white rounded-sm p-4 flex-1 border border-gray-200 flex items-center">{children}</div>;
 }
@@ -47,7 +48,7 @@ export default function DashboardStatsGrid({ orderCount }) {
         </div>
       </BoxWrapper>
       <BoxWrapper>
-      <div className="rounded-full h-12 w-12 flex items-center justify-center bg-blue-600">
+        <div className="rounded-full h-12 w-12 flex items-center justify-center bg-blue-600">
           <IoCart className="text-2xl text-white" />
         </div>
         <div className="pl-4">

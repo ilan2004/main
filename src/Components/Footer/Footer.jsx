@@ -33,8 +33,19 @@ Branch Office:
 </spam>
 </div>
 <div className="ad2">
-Building- 57, Kalpaka Nagar, Chackai,<spam  className='thick'> Trivandrum , Kerala</spam>, Pin : 695024
+Building- 57, Kalpaka Nagar, Chackai,<spam  className='thick'> Trivandrum , Kerala</spam>, Pin  695024
 </div>
+
+</div>
+<div className='allad'> <div className="ad1">
+<spam  className='thick'>
+
+</spam>
+</div>
+<div className="ad2">
+Cherakkyath Building Thengod Kakkanad<spam  className='thick'> Cochin , Kerala</spam>, Pin 680510
+</div>
+
 </div>
 <div className='allad2'> <div className="ad1">
  <spam  className='thick'>Workshop :</spam></div><div className="ad2"><spam  className='thick'> Office A1, Deepa Apartment, venkitangu, Thrissur.

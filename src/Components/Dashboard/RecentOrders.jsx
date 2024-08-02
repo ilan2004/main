@@ -5,7 +5,7 @@ import getOrderStatus from './lib/helpers';
 import { useAuth } from '../../Contexts/AuthContext';
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 
-export default function RecentOrders({ setOrderCount }) {
+export default function UserRecentOrders({ setOrderCount }) {
   const { currentUser } = useAuth();
   const [recentOrderData, setRecentOrderData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);

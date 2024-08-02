@@ -10,6 +10,7 @@ import { SnackbarProvider, useSnackbar } from 'notistack';
 const SnackForm = ({ userId }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { currentUser } = useAuth();
+  const [companyName, setCompanyName] = useState('');
   const [formData, setFormData] = useState({
     brand: '',
     VehicleModel: '',
@@ -19,7 +20,8 @@ const SnackForm = ({ userId }) => {
     BatteryCurrent: '', 
     contactMobile: '',
     Repair: '',
-    comment: ''
+    comment: '',
+    companyName: '' // Add this line
   });
   const [submittedData, setSubmittedData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,14 +34,15 @@ const SnackForm = ({ userId }) => {
     const now = new Date();
     const date = now.toLocaleDateString();
     const time = now.toLocaleTimeString();
-    // Store the form data along with the current date and time
     setSubmittedData({
       ...formData,
       date,
-      time
+      time,
+      companyName // Include this
     });
-    // Reset the form
-    setFormData({
+    // Reset the form (keep companyName)
+    setFormData(prevData => ({
+      ...prevData,
       brand: '',
       VehicleModel: '',
       chassisNumber: '',
@@ -49,7 +52,7 @@ const SnackForm = ({ userId }) => {
       contactMobile: '',
       Repair: '',
       comment: ''
-    });
+    }));
   };
 
   const handleFormSubmit = async () => {
@@ -103,22 +106,28 @@ const SnackForm = ({ userId }) => {
 
   useEffect(() => {
     if (currentUser) {
-      fetchUserLocation(currentUser.uid);
+      fetchUserData(currentUser.uid);
     }
   }, [currentUser]); // Fetch user location when currentUser changes
 
-  async function fetchUserLocation(userId) {
+  async function fetchUserData(userId) {
     try {
       const db = getFirestore();
       const userRef = doc(db, 'users', userId);
       const userSnapshot = await getDoc(userRef);
       if (userSnapshot.exists()) {
-        setUserLocation(userSnapshot.data().Location);
+        const userData = userSnapshot.data();
+        setUserLocation(userData.Location);
+        setCompanyName(userData.companyName || '');
+        setFormData(prevData => ({
+          ...prevData,
+          companyName: userData.companyName || ''
+        }));
       } else {
         console.log("User document does not exist");
       }
     } catch (error) {
-      console.error("Error fetching user location:", error);
+      console.error("Error fetching user data:", error);
     } finally {
       setLoading(false);
     }
@@ -141,6 +150,11 @@ const SnackForm = ({ userId }) => {
   const handleYearClick = (selectedYear) => {
     setYear(selectedYear);
   };
+  useEffect(() => {
+    if (currentUser) {
+      fetchUserData(currentUser.uid);
+    }
+  }, [currentUser]);
   return (
     <SnackbarProvider>
       <div className="alldetails">
@@ -149,6 +163,14 @@ const SnackForm = ({ userId }) => {
           <button className="Repair" onClick={toggleAdditionalFields}>Extended Warranty</button>
         </div>
         <form className='form-fill' onSubmit={handleSubmit}>
+        <input
+          name="companyName"
+          type="text"
+           className="feedback-input"
+            placeholder="Company Name"
+           value={formData.companyName}
+          readOnly
+/>
           <input
             name="brand"
             type="text"
@@ -250,6 +272,10 @@ const SnackForm = ({ userId }) => {
                 <tr>
                   <th>Field</th>
                   <th>Value</th>
+                </tr>
+                <tr>
+                  <td className='left-side'>Company Name</td>
+                  <td className='Right-side'>{submittedData.companyName}</td>
                 </tr>
                 <tr>
                   <td className='left-side'>Vehicle Brand</td>

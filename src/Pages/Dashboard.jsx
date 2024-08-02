@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RecentOrders from '../Components/Dashboard/RecentOrders'
+import UserRecentOrders from '../Components/Dashboard/RecentOrders'
 import './Dashboard.css'
 import DashboardStatsGrid from '../Components/Dashboard/DashboardStatsGrid';
 
@@ -10,7 +10,7 @@ export default function Dashboard() {
       <div className="dashboard-container">
         <DashboardStatsGrid orderCount={orderCount} />
         <div className="row-container">
-          <RecentOrders setOrderCount={setOrderCount} />
+          <UserRecentOrders setOrderCount={setOrderCount} />
         </div>
       </div>
     );

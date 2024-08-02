@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase"; // assuming you have firestore imported from firebase
-import { Firestore } from "firebase/firestore";
-import { collection,addDoc } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import { auth } from "../firebase";
+import { getFirestore, doc, setDoc, getDoc, collection, addDoc } from "firebase/firestore";
+
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -11,86 +9,169 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userLocation, setUserLocation] = useState(null); // New state for user location
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [userCompanyName, setUserCompanyName] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
+  async function signup(email, password, displayName, companyName, role) {
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      await userCredential.user.updateProfile({ displayName });
 
- function signup(email, password, displayName, Location) {
-    return auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Once the user is created successfully, update additional user data
-        return userCredential.user.updateProfile({
-          displayName: displayName,
-        }).then(() => {
-          // Add the location data to Firestore
-          const db = getFirestore();
-          const userRef = doc(collection(db, 'users'), userCredential.user.uid);
-          return setDoc(userRef, { Location: Location }, { merge: true });
-          //                                    ^^^^^^^^ Use 'Location' instead of 'location'
-        });
+      const db = getFirestore();
+      await setDoc(doc(db, 'users', userCredential.user.uid), {
+        email,
+        displayName,
+        companyName,
+        role
       });
-  }
-  
-  function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
-  }
 
-  function logout() {
-    return auth.signOut();
+      return userCredential;
+    } catch (error) {
+      console.error("Error signing up:", error);
+      throw error;
+    }
   }
 
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+  async function login(email, password) {
+    try {
+      const userCredential = await auth.signInWithEmailAndPassword(email, password);
+      await checkAdminStatus(userCredential.user);
+      return userCredential;
+    } catch (error) {
+      console.error("Error logging in:", error);
+      throw error;
+    }
   }
 
-  function updateEmail(email) {
-    return currentUser.updateEmail(email);
+  async function loginAsManager(email, password, companyName) {
+    try {
+      const userCredential = await auth.signInWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
+      const db = getFirestore();
+      const userRef = doc(db, 'users', user.uid);
+      const userSnapshot = await getDoc(userRef);
+      if (userSnapshot.exists() && userSnapshot.data().role === 'manager') {
+        await setDoc(userRef, { companyName }, { merge: true });
+        setUserRole('manager');
+        setCurrentUser(user);
+        return userCredential;
+      } else {
+        throw new Error("User is not a manager");
+      }
+    } catch (error) {
+      console.error("Error logging in as manager:", error);
+      throw error;
+    }
   }
 
-  function updateUser(displayName) {
-    return currentUser.updateProfile({ displayName });
+  async function checkAdminStatus(user) {
+    try {
+      const idTokenResult = await user.getIdTokenResult();
+      setIsAdmin(!!idTokenResult.claims.admin);
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+  async function logout() {
+    try {
+      await auth.signOut();
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   }
 
-  function submitFormData(formData) {
-    return addDoc(collection(Firestore, "formData"), formData);
+  async function resetPassword(email) {
+    try {
+      await auth.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.error("Error resetting password:", error);
+    }
   }
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
+  async function updateEmail(email) {
+    try {
+      await currentUser.updateEmail(email);
+    } catch (error) {
+      console.error("Error updating email:", error);
+      throw error;
+    }
+  }
 
-    return unsubscribe;
-  }, []);
-  async function fetchUserLocation(userId) {
+  async function updatePassword(password) {
+    try {
+      await currentUser.updatePassword(password);
+    } catch (error) {
+      console.error("Error updating password:", error);
+      throw error;
+    }
+  }
+
+  async function updateUser(displayName) {
+    try {
+      await currentUser.updateProfile({ displayName });
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      throw error;
+    }
+  }
+
+  async function fetchUserData(userId) {
     try {
       const db = getFirestore();
       const userRef = doc(db, 'users', userId);
       const userSnapshot = await getDoc(userRef);
       if (userSnapshot.exists()) {
-        setUserLocation(userSnapshot.data().Location);
+        const userData = userSnapshot.data();
+        setUserCompanyName(userData.companyName);
+        setUserRole(userData.role);
       } else {
         console.log("User document does not exist");
       }
     } catch (error) {
-      console.error("Error fetching user location:", error);
+      console.error("Error fetching user data:", error);
     }
   }
 
+  async function submitFormData(formData) {
+    try {
+      const db = getFirestore();
+      await addDoc(collection(db, "formData"), formData);
+    } catch (error) {
+      console.error("Error submitting form data:", error);
+      throw error;
+    }
+  }
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      setCurrentUser(user);
+      if (user) {
+        await checkAdminStatus(user);
+        await fetchUserData(user.uid);
+      } else {
+        setIsAdmin(false);
+        setUserCompanyName(null);
+        setUserRole(null);
+      }
+      setLoading(false);
+    });
+
+    return unsubscribe;
+  }, []);
 
   const value = {
     currentUser,
-    login,
-    userLocation,
+    isAdmin,
+    userCompanyName,
+    userRole,
     signup,
+    login,
+    loginAsManager,
     logout,
     resetPassword,
     updateEmail,
