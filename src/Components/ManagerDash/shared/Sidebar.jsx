@@ -8,7 +8,7 @@ import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../lib/
 import './Sidebar.css'; // Import the CSS file
 import logo from '../../../assets/img/dion.png';
 import { useAuth } from '../../../Contexts/AuthContext';
-export default function Sidebar() {
+export default function SidebarManage() {
     const { logout } = useAuth();
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false);

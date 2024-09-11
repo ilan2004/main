@@ -15,7 +15,7 @@ import LoginBox from "./Components/Login/Login1";
 import ManageDashboard from "./Pages/Manager/MangeDashboard";
 import SignupBox from "./Components/Signup/Signup";
 import ManagerLayout from "./Components/ManagerDash/shared/Layout";
-
+import ManagerForm from "./Components/ManagerDash/Form/Form";
 export default function App() {
   const ref = useRef(null);
 
@@ -40,6 +40,9 @@ export default function App() {
                 </Route>
                 <Route path="/form" element={<PrivateRoute><Layout /></PrivateRoute>}>
                   <Route index element={<Form />} />
+                </Route>
+                <Route path="/Manageform" element={<PrivateRoute><ManagerLayout /></PrivateRoute>}>
+                  <Route index element={<ManagerForm />} />
                 </Route>
               </Routes>
 

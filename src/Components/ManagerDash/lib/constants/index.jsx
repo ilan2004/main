@@ -13,13 +13,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
 		label: 'Dashboard',
-		path: '/Dashboard',
+		path: '/ManagerDashboard',
 		icon: <HiOutlineViewGrid />
 	},
 	{
 		key: 'Form',
 		label: 'Form',
-		path: '/Form',
+		path: '/ManageForm',
 		icon: <HiOutlineCube />
 	},
 	// {
