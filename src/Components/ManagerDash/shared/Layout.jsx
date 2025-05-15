@@ -7,7 +7,7 @@ import './Layout.css'; // Import the CSS file
 
 export default function ManagerLayout() {
     return (
-        <div>
+        <div className='layout'>
         <div className="layout-container">
             <SidebarManage />
             <div className="main-content">

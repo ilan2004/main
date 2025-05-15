@@ -3,9 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import Home from "./Pages/Home";
-import Connect from "./Pages/Connect";
 import './App.css'
-import Form from "./Components/Form/Form";
+import Form from "./Components/Form/Form1";
 import Layout from "./Components/Dashboard/shared/Layout";
 import Dashboard from "./Pages/Dashboard";
 import Footer from "./Components/Footer/Footer";
@@ -13,9 +12,10 @@ import { NextUIProvider } from "@nextui-org/react";
 import { AuthProvider } from "./Contexts/AuthContext";
 import LoginBox from "./Components/Login/Login1";
 import ManageDashboard from "./Pages/Manager/MangeDashboard";
-import SignupBox from "./Components/Signup/Signup";
 import ManagerLayout from "./Components/ManagerDash/shared/Layout";
 import ManagerForm from "./Components/ManagerDash/Form/Form";
+
+import { Loginpage } from "./Pages/Loginpage/loginpage";
 export default function App() {
   const ref = useRef(null);
 
@@ -30,8 +30,7 @@ export default function App() {
             <div className="app">
               <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/login' element={<LoginBox />} />
-                <Route path='/Newaccount' element={<SignupBox />} />
+                <Route path='/login' element={<Loginpage/>} />
                 <Route path="/dashboard" element={<PrivateRoute><Layout /></PrivateRoute>}>
                   <Route index element={<Dashboard />} />
                 </Route>
@@ -54,3 +53,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

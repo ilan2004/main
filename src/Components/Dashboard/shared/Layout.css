@@ -3,9 +3,9 @@
 /* Layout container */
 .layout-container {
     background-color: #f3f4f6; /* Adjust background color as needed */
-    height: 100vh;
+    height: 100%;
     width: 100vw;
-    overflow: hidden;
+
     display: flex;
     flex-direction: row;
   }
@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    
   }
   
   /* Header container */
@@ -26,6 +27,7 @@
   .content-container {
     flex: 1;
     padding: 1rem; /* Adjust padding as needed */
-    overflow-y: auto;
+    height: 100%;
   }
+  
   

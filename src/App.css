@@ -1,21 +1,4 @@
-.Wave{
-  position: absolute;
-}
-.cursor {
-  background-color: #009A89;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
 
-}
-.App{
-  scroll-behavior: smooth;
-  background-color: black;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

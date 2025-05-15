@@ -1,37 +1,56 @@
-import React from 'react';
+// CompanyUsers.js
+import React, { useState } from 'react';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
-export default function UserTable({
-  users,
-  editingUser,
-  userForm,
-  handleEditUser,
-  handleUserChange,
-  handleSaveUser,
-  setEditingUser,
-}) {
+const CompanyUsers = ({ userData }) => {
+  const [editingUser, setEditingUser] = useState(null);
+  const [userForm, setUserForm] = useState({});
+
+  const handleEditUser = (user) => {
+    setEditingUser(user);
+    setUserForm(user);
+  };
+
+  const handleUserChange = (e) => {
+    setUserForm({
+      ...userForm,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSaveUser = async () => {
+    const db = getFirestore();
+    const userRef = doc(db, 'users', editingUser.id);
+    try {
+      await updateDoc(userRef, userForm);
+      setEditingUser(null);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
   return (
-    <div className="border-x border-gray-200 rounded-sm mt-3">
+    <div className="user-section">
+      <strong className="header mt-8">Company Users</strong>
       <table className="table">
         <thead>
-          <tr className="table-row">
-            <th className="table-cell">ID</th>
-            <th className="table-cell">Display Name</th>
-            <th className="table-cell">Email</th>
-            <th className="table-cell">Role</th>
-            <th className="table-cell">Actions</th>
+          <tr>
+            <th>ID</th>
+            <th>Display Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="table-row">
-              <td className="table-cell">{user.id}</td>
-              <td className="table-cell">
+          {userData.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>
                 {editingUser && editingUser.id === user.id ? (
                   <input
-                    type="text"
                     name="displayName"
-                    className="text-edit"
                     value={userForm.displayName || ''}
                     onChange={handleUserChange}
                   />
@@ -39,37 +58,13 @@ export default function UserTable({
                   user.displayName
                 )}
               </td>
-              <td className="table-cell">
-                {editingUser && editingUser.id === user.id ? (
-                  <input
-                    type="email"
-                    name="email"
-                    className="email-edit"
-                    value={userForm.email || ''}
-                    onChange={handleUserChange}
-                  />
-                ) : (
-                  user.email
-                )}
-              </td>
-              <td className="table-cell">
-                {editingUser && editingUser.id === user.id ? (
-                  <input
-                    type="text"
-                    name="role"
-                    className="text-edit"
-                    value={userForm.role || ''}
-                    onChange={handleUserChange}
-                  />
-                ) : (
-                  user.role
-                )}
-              </td>
-              <td className="table-cell">
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td>
                 {editingUser && editingUser.id === user.id ? (
                   <>
                     <button onClick={handleSaveUser}>Save</button>
-                    <button className="cancel" onClick={() => setEditingUser(null)}>Cancel</button>
+                    <button onClick={() => setEditingUser(null)}>Cancel</button>
                   </>
                 ) : (
                   <button onClick={() => handleEditUser(user)}>
@@ -83,4 +78,6 @@ export default function UserTable({
       </table>
     </div>
   );
-}
+};
+
+export default CompanyUsers;

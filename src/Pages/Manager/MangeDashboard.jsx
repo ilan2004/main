@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ManagerRecentOrders from '../../Components/ManagerDash/RecentOrders';
+import ManagerRecentOrders from '../../Components/ManagerDash/Managerdashboard';
 import './ManageDashboard.css'
 import ManagerDashboardStatsGrid from '../../Components/ManagerDash/DashboardStatsGrid';
 

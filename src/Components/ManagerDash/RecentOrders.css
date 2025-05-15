@@ -6,7 +6,7 @@
   padding: 1rem;
   border: 1px solid #e5e5e5;
   border-radius: 0.25rem;
-  width: 80vw;
+  width:80%;
   height: 80vh;
 }
 
@@ -40,6 +40,18 @@
   text-align: left;
 }
 
+/* Editable Input Styles */
+.editable-cell {
+  background-color: #f9fafb; /* Light background for editable cells */
+  border: 1px solid #2563eb; /* Highlight border color */
+  border-radius: 0.25rem;
+}
+
+.editable-input {
+  border: 1px solid #2563eb; /* Highlight border for inputs */
+  outline: none; /* Remove outline on focus */
+}
+
 /* Table Link */
 .table-link {
   color: #2563eb;
@@ -47,37 +59,12 @@
 }
 
 /* Editable Input */
-.text-edit,
-.email-edit,
-.date-edit,
-.time-edit,
-select {
-  border: 1px solid #d1d5db;
-  border-radius: 0.25rem;
-  padding: 0.25rem;
-  font-size: 0.875rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
 /* Buttons */
-button {
-  background-color: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
 
 
+/* Styles for editing state */
 
-button.cancel {
-  background-color: #f3f4f6;
-  color: #374151;
-}
+.managerdashboard{
+  width:80%;
 
-button.cancel:hover {
-  background-color: #e5e7eb;
 }

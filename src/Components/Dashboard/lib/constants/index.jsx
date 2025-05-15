@@ -18,9 +18,9 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	},
 
 	{
-		key: 'Form',
-		label: 'Form',
-		path: '/Form',
+		key: 'Job order',
+		label: 'Job order',
+		path: '/ManageForm',
 		icon: <HiOutlineCube />
 	},
 	// {

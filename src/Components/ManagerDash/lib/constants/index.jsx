@@ -17,8 +17,8 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiOutlineViewGrid />
 	},
 	{
-		key: 'Form',
-		label: 'Form',
+		key: 'Job order',
+		label: 'Job order',
 		path: '/ManageForm',
 		icon: <HiOutlineCube />
 	},
@@ -32,16 +32,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
-	{
-		key: 'settings',
-		label: 'Settings',
-		path: '/settings',
-		icon: <HiOutlineCog />
-	},
+
 	{
 		key: 'support',
 		label: 'Help & Support',
 		path: "https://wa.me/918304963000",
-		icon: <HiOutlineQuestionMarkCircle />
-	}
+		icon: <HiOutlineQuestionMarkCircle />,
+		external: true
+	  }	  
 ]

@@ -1,115 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import './Form.scss';
 import { getAuth } from 'firebase/auth';
 import { useAuth } from '../../../Contexts/AuthContext';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { addDoc, collection } from 'firebase/firestore';
-import emailjs from '@emailjs/browser';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { 
+    getFirestore, 
+    doc, 
+    getDoc, 
+    collection, 
+    query, 
+    where,
+    getDocs,
+    addDoc
+  } from 'firebase/firestore';
+import { 
+  TextField, 
+  Button, 
+  Container, 
+  Grid, 
+  Typography, 
+  Snackbar,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel
+} from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import MuiAlert from '@mui/material/Alert';
+import SubmittedDataTable from './Submitteddatatable';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#117865',
+    },
+  },
+});
 
-const SnackForm = ({ userId }) => {
-  const { enqueueSnackbar } = useSnackbar();
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+const removeUndefinedValues = (obj) => {
+    return Object.fromEntries(
+      Object.entries(obj).filter(([_, v]) => v != null && v !== '')
+    );
+  };
+const Form = () => {
   const { currentUser } = useAuth();
   const [companyName, setCompanyName] = useState('');
   const [formData, setFormData] = useState({
-    brand: '',
+    Brand: '',
     VehicleModel: '',
-    chassisNumber: '', 
-    servicenumber: '', 
-    BatteryVoltage: '', 
-    BatteryCurrent: '', 
+    ChassisNumber: '',
+    product: '',
+    SerialNumber: '',
+    ServiceNumber: '',
+    BatteryVoltage: '',
+    BatteryCurrent: '',
     contactMobile: '',
     Repair: '',
     comment: '',
-    companyName: '' // Add this line
+    companyName: '',
+    VehiclekiloMeters: ''
   });
   const [submittedData, setSubmittedData] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const now = new Date();
-    const date = now.toLocaleDateString();
-    const time = now.toLocaleTimeString();
-    setSubmittedData({
-      ...formData,
-      date,
-      time,
-      companyName // Include this
-    });
-    // Reset the form (keep companyName)
-    setFormData(prevData => ({
-      ...prevData,
-      brand: '',
-      VehicleModel: '',
-      chassisNumber: '',
-      servicenumber: '',
-      BatteryVoltage: '',
-      BatteryCurrent: '',
-      contactMobile: '',
-      Repair: '',
-      comment: ''
-    }));
-  };
-
-  const handleFormSubmit = async () => {
-    try {
-      setIsSubmitting(true);
-
-      // Access the current user's authentication information
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-      if (!user) {
-        throw new Error("User not authenticated");
-      }
-
-      // Prepare data for submission
-      const formData = {
-        ...submittedData,
-        userId: user.uid
-      };
-
-      // Access Firestore
-      const db = getFirestore();
-
-      // Send data to Firestore
-      await addDoc(collection(db, "formData"), formData);
-
-      // Prepare data for email submission
-      const templateParams = {
-        ...formData,
-        userEmail: currentUser.email // Use the current user's email address as the recipient
-      };
-
-      // Send email with form data to the current user's email address using EmailJS
-      await emailjs.send('service_6fw3qz4', 'template_zevj6nm', templateParams, {
-        publicKey: 'Qbcmn6dU4S2rOSw6O',
-      });
-
-      enqueueSnackbar('Submitted successfully!', { variant: 'success' });
-
-      // Reset form submission state
-      setIsSubmitting(false);
-
-      // Optionally, you can add a success message or redirect the user
-    } catch (error) {
-      console.error("Error submitting form data:", error);
-      enqueueSnackbar('Error submitting form data. Please try again.', { variant: 'error' });
-      // Handle error, display error message, etc.
-      setIsSubmitting(false);
-    }
-  };
+  const BrandOptions = ['Hero Electric', 'Joy E-Bike', 'Komaki'];
+  const productOptions = ['Battery', 'Charger', 'Motor', 'Controller'];
+  const [userDisplayName, setUserDisplayName] = useState('');
 
   useEffect(() => {
     if (currentUser) {
       fetchUserData(currentUser.uid);
     }
-  }, [currentUser]); // Fetch user location when currentUser changes
+  }, [currentUser]);
 
   async function fetchUserData(userId) {
     try {
@@ -118,8 +86,8 @@ const SnackForm = ({ userId }) => {
       const userSnapshot = await getDoc(userRef);
       if (userSnapshot.exists()) {
         const userData = userSnapshot.data();
-        setUserLocation(userData.Location);
         setCompanyName(userData.companyName || '');
+        setUserDisplayName(userData.displayName || '');
         setFormData(prevData => ({
           ...prevData,
           companyName: userData.companyName || ''
@@ -129,226 +97,302 @@ const SnackForm = ({ userId }) => {
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
-    } finally {
-      setLoading(false);
     }
   }
 
-  const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const now = new Date();
+    const submissionDate = now.toLocaleDateString();
+    const submissionTime = now.toLocaleTimeString();
+  
+    const firestore = getFirestore();
+    const userQuery = query(collection(firestore, 'users'), where('email', '==', currentUser.email));
+    const userSnapshot = await getDocs(userQuery);
+    let postedByDisplayName = currentUser.email;
+    if (!userSnapshot.empty) {
+      postedByDisplayName = userSnapshot.docs[0].data().displayName || currentUser.email;
+    }
+  
+    let dataToSubmit = {
+      ...formData,
+      submissionDate,
+      submissionTime,
+      companyName,
+      postedBy: postedByDisplayName,
+      Dealer: '',
+      InvoiceNo: '',
+      Amount: '',
+      Payment: '',
+      DeliveryDate: '',
+      agent: '',
+    };
+  
+    dataToSubmit = removeUndefinedValues(dataToSubmit);
+  
+    try {
+      const docRef = await addDoc(collection(firestore, 'submissions'), dataToSubmit);
+      console.log("Document written with ID: ", docRef.id);
+      setSubmittedData(dataToSubmit);
+      setSnackbar({
+        open: true,
+        message: 'Form written successfully scroll down ',
+        severity: 'warning'    
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      setSnackbar({
+        open: true,
+        message: 'Error submitting form. Please try again.',
+        severity: 'error'
+      });
+    }
+  
+    setSubmittedData({
+      ...formData,
+      submissionDate,
+      submissionTime,
+      companyName,
+      postedBy: postedByDisplayName,
+    });
+  
+    setFormData(prevData => ({
+      ...prevData,
+      Brand: '',
+      VehicleModel: '',
+      ChassisNumber: '',
+      product: '',
+      SerialNumber: '',
+      ServiceNumber: '',
+      BatteryVoltage: '',
+      BatteryCurrent: '',
+      contactMobile: '',
+      Repair: '',
+      comment: '',
+      VehiclekiloMeters: '',
+      Dealer: '',
+      InvoiceNo: '',
+      Amount: '',
+      Payment: '',
+      DeliveryDate: '',
+      agent: ''
+    }));
+  };
+
   const toggleAdditionalFields = () => {
     setShowAdditionalFields(!showAdditionalFields);
-    // Show or hide snackbar based on the visibility of additional fields
-    if (!showAdditionalFields) {
-      enqueueSnackbar('Extended Warranty FIELDS ON!', { variant: 'success' });
-
-    } else {
-      enqueueSnackbar('Extended Warranty FIELDS OFF!', { variant: 'warning' });
-    
-    }
+    setSnackbar({
+      open: true,
+      message: showAdditionalFields ? 'Extended Warranty FIELDS OFF!' : 'Extended Warranty FIELDS ON!',
+      severity: showAdditionalFields ? 'warning' : 'success'
+    });
   };
-  const [year, setYear] = useState('');
 
-  const handleYearClick = (selectedYear) => {
-    setYear(selectedYear);
-  };
-  useEffect(() => {
-    if (currentUser) {
-      fetchUserData(currentUser.uid);
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
     }
-  }, [currentUser]);
+    setSnackbar({ ...snackbar, open: false });
+  };
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
   return (
-    <SnackbarProvider>
-      <div className="alldetails">
-        <div className="repairbut">
-          <button className="Repair" >SERVICE/REPAIR</button>
-          <button className="Repair" onClick={toggleAdditionalFields}>Extended Warranty</button>
-        </div>
-        <form className='form-fill' onSubmit={handleSubmit}>
-        <input
-          name="companyName"
-          type="text"
-           className="feedback-input"
-            placeholder="Company Name"
-           value={formData.companyName}
-          readOnly
-/>
-          <input
-            name="brand"
-            type="text"
-            className="feedback-input"
-            placeholder="Vehicle Brand"
-            value={formData.brand}
-            onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
-          />
-          <input
-            name="VehicleModel"
-            type="text"
-            className="feedback-input"
-            placeholder="Vehicle Model"
-            value={formData.VehicleModel}
-            onChange={(e) => setFormData({ ...formData, VehicleModel: e.target.value })}
-          />
-          <input
-            name="chassisNumber"
-            type="text"
-            className="feedback-input"
-            placeholder="Chassis Number/ Motor Number:"
-            value={formData.chassisNumber}
-            onChange={(e) => setFormData({ ...formData, chassisNumber: e.target.value })}
-          />
-          <input
-            name="servicenumber"
-            type="number"
-            className="feedback-input"
-            placeholder="Battery Service Number: "
-            value={formData.registrationNumber}
-            onChange={(e) => setFormData({ ...formData, servicenumber: e.target.value })}
-          />
-          <input
-            name="BatteryVoltage"
-            type="number"
-            className="feedback-input"
-            placeholder="Battery Voltage"
-            value={formData.BatteryVoltage}
-            onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
-          />
-          <input
-            name="BatteryCurrent"
-            type="number"
-            className="feedback-input"
-            placeholder="Battery Current"
-            value={formData.BatteryCurrent}
-            onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
-          />
-          <input
-            name="contactMobile"
-            type="number"
-            className="feedback-input"
-            placeholder="Contact Mobile"
-            value={formData.contactMobile}
-            onChange={(e) => setFormData({ ...formData, contactMobile: e.target.value })}
-          />
-          {showAdditionalFields && (
-            <>
-              <input
-                name="VehiclekiloMeters"
-                type="text"
-                className="feedback-input"
-                placeholder="Vehicle kiloMeters"
-                value={formData.VehiclekiloMeters}
-                onChange={(e) => setFormData({ ...formData, VehiclekiloMeters: e.target.value })}
+    <ThemeProvider theme={theme}>
+      <Container maxWidth="md">
+        <Typography variant="h4" align="center" gutterBottom>
+          SERVICE/REPAIR FORM
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              fullWidth
+            >
+              SERVICE/REPAIR
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              fullWidth
+              onClick={toggleAdditionalFields}
+            >
+              Extended Warranty
+            </Button>
+          </Grid>
+        </Grid>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2} style={{ marginTop: '20px' }}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="companyName"
+                label="Company Name"
+                value={formData.companyName}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="outlined"
               />
-              <input
-                name="Battery Voltage "
-                type="text"
-                className="feedback-input"
-                placeholder="BatteryVoltage"
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Brand</InputLabel>
+                <Select
+                  name="Brand"
+                  value={formData.Brand}
+                  onChange={handleChange}
+                  label="Brand"
+                >
+                  {BrandOptions.map((option) => (
+                    <MenuItem key={option} value={option}>{option}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="VehicleModel"
+                label="Vehicle Model"
+                value={formData.VehicleModel}
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="ChassisNumber"
+                label="Chassis Number/ Motor Number"
+                value={formData.ChassisNumber}
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Product</InputLabel>
+                <Select
+                  name="product"
+                  value={formData.product}
+                  onChange={handleChange}
+                  label="Product"
+                >
+                  {productOptions.map((option) => (
+                    <MenuItem key={option} value={option}>{option}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="SerialNumber"
+                label="Serial Number"
+                value={formData.SerialNumber}
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="BatteryVoltage"
+                label="Battery Voltage"
+                type="number"
                 value={formData.BatteryVoltage}
-                onChange={(e) => setFormData({ ...formData, BatteryVoltage: e.target.value })}
+                onChange={handleChange}
+                variant="outlined"
               />
-              <input
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
                 name="BatteryCurrent"
-                type="text"
-                className="feedback-input"
-                placeholder="Additional Field 2"
+                label="Battery Current"
+                type="number"
                 value={formData.BatteryCurrent}
-                onChange={(e) => setFormData({ ...formData, BatteryCurrent: e.target.value })}
+                onChange={handleChange}
+                variant="outlined"
               />
-            </>
-          )}
-          <textarea
-            name="comment"
-            className="feedback-input"
-            placeholder="Comment"
-            value={formData.comment}
-            onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-          ></textarea>
-          <input type="submit" value="SUBMIT" />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="contactMobile"
+                label="Contact Mobile"
+                type="number"
+                value={formData.contactMobile}
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
+            {showAdditionalFields && (
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  name="VehiclekiloMeters"
+                  label="Vehicle kiloMeters"
+                  value={formData.VehiclekiloMeters}
+                  onChange={handleChange}
+                  variant="outlined"
+                />
+              </Grid>
+                          )}
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="comment"
+                label="Comment"
+                multiline
+                rows={4}
+                value={formData.comment}
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
+                SUBMIT
+              </Button>
+            </Grid>
+          </Grid>
         </form>
-        <div className="for-table">
-          {/* Render table if form is submitted */}
-          {submittedData && (
-            <table>
-              <tbody>
-                <tr>
-                  <th>Field</th>
-                  <th>Value</th>
-                </tr>
-                <tr>
-                  <td className='left-side'>Company Name</td>
-                  <td className='Right-side'>{submittedData.companyName}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Vehicle Brand</td>
-                  <td className='Right-side'>{submittedData.brand}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Vehicle Model</td>
-                  <td className='Right-side'>{submittedData.VehicleModel}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Chassis Number/ Motor Number:</td>
-                  <td className='Right-side'>{submittedData.chassisNumber}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Battery Service Number</td>
-                  <td className='Right-side'>{submittedData.servicenumber}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Battery Voltage</td>
-                  <td className='Right-side'>{submittedData.BatteryVoltage}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Battery Current</td>
-                  <td className='Right-side'>{submittedData.BatteryCurrent}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Contact Mobile</td>
-                  <td className='Right-side'>{submittedData.contactMobile}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Comment</td>
-                  <td className='Right-side'>{submittedData.comment}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Submission Date</td>
-                  <td className='Right-side'>{submittedData.date}</td>
-                </tr>
-                <tr>
-                  <td className='left-side'>Submission Time</td>
-                  <td className='Right-side'>{submittedData.time}</td>
-                </tr>
-                <div className="button-div">
-                  <button className="table-submit" onClick={handleFormSubmit} disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
-                  </button>
-                </div>
-                <div className="years">
-                  <button className="two" onClick={() => handleYearClick('2 Years')}>
-                    2 Years E.Warranty
-                  </button>
-                  <button className="fiveyear" onClick={() => handleYearClick('5 Years')}>
-                    5 Years E.Warranty
-                  </button>
-                </div>
-                <div className="costof">
-                  <h3>Cost of --{year}-- Warranty will be ------</h3>
-                </div>
-              </tbody>
-            </table>
-          )}
-        </div>
-      </div>
-    </SnackbarProvider>
+        
+        {submittedData && (
+          <SubmittedDataTable 
+            submittedData={submittedData} 
+            currentUser={currentUser}
+          />
+        )}
+        
+        <Snackbar 
+          open={snackbar.open} 
+          autoHideDuration={6000} 
+          onClose={handleCloseSnackbar}
+        >
+          <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+            {snackbar.message}
+          </Alert>
+        </Snackbar>
+      </Container>
+    </ThemeProvider>
   );
 }
 
-const ManagerForm = () => {
-  return (
-    <SnackbarProvider>
-      <SnackForm />
-    </SnackbarProvider>
-  );
-};
-
-export default ManagerForm;
+export default Form;

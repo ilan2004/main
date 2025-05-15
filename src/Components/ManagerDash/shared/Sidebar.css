@@ -2,15 +2,13 @@
 
 /* Sidebar container */
 .sidebar-container {
-  background-color: #000000; /* Adjust background color as needed */
-    width: 15rem; /* Adjust width as needed */
+  background-color: #000000; /* Adjust background color as needed */ /* Adjust width as needed */
     padding: 0.75rem; /* Adjust padding as needed */
     display: flex;
     flex-direction: column;
     position: sticky;
     height: auto;
-
- 
+    width:10%
   }
   
   /* Logo container */
@@ -50,7 +48,8 @@
   
   .link:hover,
   .link.active {
-    background-color: #1f2937; /* Adjust hover and active background color as needed */
+    background-color: #1f2937;
+    text-decoration: none; /* Adjust hover and active background color as needed */
     color: #f9fafb; /* Adjust hover and active color as needed */
   }
   

@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 import { useAuth } from '../../Contexts/AuthContext';
+import { db } from "../../firebase";
+
 export default function NavbarV() {
   const { currentUser } = useAuth();
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    const fetchRole = async () => {
+      if (currentUser) {
+        try {
+          const userDoc = await db.collection('users').doc(currentUser.uid).get();
+          if (userDoc.exists) {
+            setRole(userDoc.data().role);
+          }
+        } catch (error) {
+          console.error("Error fetching user role:", error);
+        }
+      }
+    };
+    fetchRole();
+  }, [currentUser]);
+
   const handleClick = (e) => {
     e.preventDefault();
-    const url = currentUser ? '/Dashboard' : '/Login';
-    window.open(url, '_blank');
+    if (role) {
+      const url = role === 'manager' ? '/ManagerDashboard' : '/Dashboard';
+      window.open(url, '_blank');
+    } else {
+      window.open('/Login', '_blank');
+    }
   };
+
   return (
-    <Navbar shouldHideOnScroll className="bg-black text-white">
+    <Navbar shouldHideOnScroll className="bg-black text-white hover:no-underline">
       <NavbarBrand>
         <p className="font-bold text-inherit">DION</p>
       </NavbarBrand>
@@ -24,15 +49,18 @@ export default function NavbarV() {
             Services
           </Link>
         </NavbarItem>
-        <NavbarItem>
-        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        {/* <NavbarItem className="hidden lg:flex">
-          <Link href="#" className="text-white">Login</Link>
-        </NavbarItem> */}
         <NavbarItem>
-          <Button as={Link} to={currentUser ? '/Dashboard' : '/Login'} onClick={handleClick} color="primary" href="#" variant="flat" className="bg-white text-black">
+          <Button
+            as={Link}
+            to="#"
+            onClick={handleClick}
+            color="primary"
+            href="#"
+            variant="flat"
+            className="bg-white text-black "
+          >
             Account
           </Button>
         </NavbarItem>

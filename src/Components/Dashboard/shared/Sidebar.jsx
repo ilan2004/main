@@ -32,12 +32,12 @@ export default function Sidebar() {
             path: '/ManagerDashboard',
             icon: <HiOutlineViewGrid />
         },
-        {
-            key: 'Form',
-            label: 'Manager Form',
-            path: '/ManagerForm',
-            icon: <HiOutlineCube />
-        }
+        // {
+        //     key: 'Form',
+        //     label: 'Manager Form',
+        //     path: '/ManagerForm',
+        //     icon: <HiOutlineCube />
+        // }
     ] : [
         {
             key: 'dashboard',
@@ -45,12 +45,12 @@ export default function Sidebar() {
             path: '/Dashboard',
             icon: <HiOutlineViewGrid />
         },
-        {
-            key: 'Form',
-            label: 'Form',
-            path: '/Form',
-            icon: <HiOutlineCube />
-        }
+        // {
+        //     key: 'Form',
+        //     label: 'Form',
+        //     path: '/Form',
+        //     icon: <HiOutlineCube />
+        // }
     ];
 
     const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

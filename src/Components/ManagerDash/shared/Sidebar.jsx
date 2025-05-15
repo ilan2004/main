@@ -56,8 +56,21 @@ export default function SidebarManage() {
 
 function SidebarLink({ link }) {
     const { pathname } = useLocation();
+    const isExternal = link.path.startsWith('http');
 
-    return (
+    return isExternal ? (
+        // For external links, use <a> tag
+        <a
+            href={link.path}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+        >
+            {link.icon}
+            {link.label}
+        </a>
+    ) : (
+        // For internal links, use React Router's <Link>
         <Link
             to={link.path}
             className={`link ${pathname === link.path ? 'active' : ''}`}

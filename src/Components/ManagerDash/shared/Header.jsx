@@ -1,35 +1,46 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt } from 'react-icons/hi';
-import { Menu, Popover, Transition } from '@headlessui/react';
-import { useNavigate } from 'react-router-dom';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import { useAuth } from '../../../Contexts/AuthContext';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
+import { Menu, Popover, Transition } from '@headlessui/react';
+import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 export default function Header({ onSearch }) {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const [userRole, setUserRole] = useState('');
+  const [displayName, setDisplayName] = useState('');
 
   useEffect(() => {
-    const fetchUserRole = async () => {
-      try {
-        if (currentUser) {
-          const db = getFirestore();
-          const userDoc = doc(db, 'users', currentUser.uid);
-          const docSnapshot = await getDoc(userDoc);
-
-          if (docSnapshot.exists()) {
-            const userData = docSnapshot.data();
-            setUserRole(userData.role || '');
+    const fetchUserData = async () => {
+      if (currentUser) {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        
+        if (user) {
+          // First, try to get the display name from the user object
+          if (user.displayName) {
+            setDisplayName(user.displayName);
+          } else {
+            // If displayName is not available, try to fetch it from Firestore
+            const db = getFirestore();
+            const userDocRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userDocRef);
+            
+            if (userDoc.exists() && userDoc.data().displayName) {
+              setDisplayName(userDoc.data().displayName);
+            } else {
+              // If still not available, use the email or a default value
+              setDisplayName(user.email || 'User');
+            }
           }
         }
-      } catch (error) {
-        console.error('Error fetching user role:', error);
       }
     };
 
-    fetchUserRole();
+    fetchUserData();
   }, [currentUser]);
 
   return (
@@ -40,7 +51,6 @@ export default function Header({ onSearch }) {
           type="text"
           placeholder="Search..."
           className="search-input"
-          onChange={onSearch}
         />
       </div>
       <div className="flex items-center gap-2 mr-2">
@@ -77,7 +87,7 @@ export default function Header({ onSearch }) {
               <span className="sr-only">Open user menu</span>
               <div className="UserName">
                 Welcome <br />
-                {userRole}
+                {displayName}
                 <span className="sr-only"></span>
               </div>
             </Menu.Button>
@@ -96,7 +106,9 @@ export default function Header({ onSearch }) {
                 {({ active }) => (
                   <div
                     onClick={() => navigate('/profile')}
-                    className={`active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer ${active ? 'bg-gray-100' : ''}`}
+                    className={`${
+                      active ? 'bg-gray-100' : ''
+                    } active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200`}
                   >
                     Your Profile
                   </div>
@@ -106,7 +118,9 @@ export default function Header({ onSearch }) {
                 {({ active }) => (
                   <div
                     onClick={() => navigate('/settings')}
-                    className={`active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer ${active ? 'bg-gray-100' : ''}`}
+                    className={`${
+                      active ? 'bg-gray-100' : ''
+                    } active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200`}
                   >
                     Settings
                   </div>
@@ -115,8 +129,9 @@ export default function Header({ onSearch }) {
               <Menu.Item>
                 {({ active }) => (
                   <div
-                    onClick={() => navigate('/signout')}
-                    className={`active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer ${active ? 'bg-gray-100' : ''}`}
+                    className={`${
+                      active ? 'bg-gray-100' : ''
+                    } active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200`}
                   >
                     Sign out
                   </div>

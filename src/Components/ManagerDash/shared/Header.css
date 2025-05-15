@@ -4,7 +4,8 @@
 .header-container {
     background-color: #ffffff;
     height: 4rem; /* Adjust height as needed */
-    padding: 0 1rem; /* Adjust padding as needed */
+    padding: 0 1rem;
+    width:100%; /* Adjust padding as needed */
     display: flex;
     align-items: center;
     justify-content: space-between;
