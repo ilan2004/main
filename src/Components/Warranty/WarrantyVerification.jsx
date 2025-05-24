@@ -23,10 +23,34 @@ const WarrantyVerification = () => {
         
         const querySnapshot = await getDocs(warrantyQuery);
         
+        // Inside your fetchWarrantyData function
         if (!querySnapshot.empty) {
           setWarrantyData(querySnapshot.docs[0].data());
         } else {
-          setError('Warranty information not found for this serial number');
+          // Try alternative collections if the primary one doesn't have results
+          const alternativeCollections = ['formData', 'submissions'];
+          let found = false;
+          
+          for (const collectionName of alternativeCollections) {
+            if (found) break;
+            
+            console.log(`Trying alternative collection: ${collectionName}`);
+            const altQuery = query(
+              collection(db, collectionName),
+              where('serialNumber', '==', serialNumber)
+            );
+            
+            const altSnapshot = await getDocs(altQuery);
+            if (!altSnapshot.empty) {
+              console.log(`Found data in ${collectionName} collection`);
+              setWarrantyData(altSnapshot.docs[0].data());
+              found = true;
+            }
+          }
+          
+          if (!found) {
+            setError('Warranty information not found for this serial number');
+          }
         }
       } catch (err) {
         console.error('Error fetching warranty data:', err);
