@@ -14,6 +14,7 @@ import LoginBox from "./Components/Login/Login1";
 import ManageDashboard from "./Pages/Manager/MangeDashboard";
 import ManagerLayout from "./Components/ManagerDash/shared/Layout";
 import ManagerForm from "./Components/ManagerDash/Form/Form";
+import WarrantyVerification from "./Components/Warranty/WarrantyVerification";
 
 import { Loginpage } from "./Pages/Loginpage/loginpage";
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Loginpage/>} />
+                <Route path='/warranty/:serialNumber' element={<WarrantyVerification />} />
                 <Route path="/dashboard" element={<PrivateRoute><Layout /></PrivateRoute>}>
                   <Route index element={<Dashboard />} />
                 </Route>
