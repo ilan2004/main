@@ -84,20 +84,175 @@
   font-weight: 400;
 }
 
-@media (max-width: 768px) {
+/* Tablet styles */
+@media (max-width: 1024px) {
+  .warranty-verification {
+    padding: 15px;
+  }
+  
   .warranty-verification-box {
-    padding: 25px;
+    padding: 30px;
+    width: 95%;
+  }
+}
+
+/* Mobile styles - Enhanced for better viewport fit */
+@media (max-width: 768px) {
+  .warranty-verification {
+    padding: 10px;
+    min-height: calc(100vh - 60px); /* Reduced navbar height assumption */
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  
+  .warranty-verification-box {
+    padding: 20px;
+    width: 100%;
+    margin: 0;
+    border-radius: 8px;
+    min-height: auto;
   }
   
   .warranty-verification-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    line-height: 1.3;
+  }
+  
+  .warranty-verification-message {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    padding: 0 5px;
+  }
+  
+  .warranty-verification-serial {
+    font-size: 1rem;
+    margin-top: 10px;
+    word-break: break-all;
+  }
+  
+  .warranty-verification-details {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 6px;
   }
   
   .warranty-verification-table {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    display: block;
+    width: 100%;
+  }
+  
+  .warranty-verification-table tbody {
+    display: block;
+  }
+  
+  .warranty-verification-table tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    padding: 12px;
+    border-bottom: none;
+  }
+  
+  .warranty-verification-table tr:last-child {
+    margin-bottom: 0;
   }
   
   .warranty-verification-table td {
-    padding: 12px 15px;
+    display: block;
+    padding: 4px 0;
+    border-bottom: none;
+    width: 100% !important;
+  }
+  
+  .warranty-verification-table td:first-child {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .warranty-verification-table td:last-child {
+    font-size: 1rem;
+    font-weight: 500;
+    word-break: break-word;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .warranty-verification {
+    padding: 5px;
+    padding-top: 15px;
+  }
+  
+  .warranty-verification-box {
+    padding: 15px;
+    border-radius: 6px;
+  }
+  
+  .warranty-verification-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+  }
+  
+  .warranty-verification-message {
+    font-size: 0.95rem;
+  }
+  
+  .warranty-verification-serial {
+    font-size: 0.9rem;
+  }
+  
+  .warranty-verification-details {
+    padding: 8px;
+    margin-top: 15px;
+  }
+  
+  .warranty-verification-table tr {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .warranty-verification-table td:first-child {
+    font-size: 0.8rem;
+  }
+  
+  .warranty-verification-table td:last-child {
+    font-size: 0.95rem;
+  }
+}
+
+/* Landscape phone orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+  .warranty-verification {
+    min-height: 100vh;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .warranty-verification-box {
+    padding: 15px;
+  }
+  
+  .warranty-verification-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .warranty-verification-details {
+    margin-top: 15px;
+  }
+  
+  .warranty-verification-table tr {
+    margin-bottom: 10px;
+    padding: 8px;
   }
 }
